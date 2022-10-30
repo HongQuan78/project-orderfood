@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap");
+
+
+body {
+    font-family: "Kanit", sans-serif !important;
+    background-color: #ffd230 !important;
+}
+
+.overall-card {
+    display: grid;
+    grid-auto-columns: 100%;
+    grid-column-gap: 10px;
+    grid-auto-flow: column;
+    padding: 25px 0px;
+    list-style: none;
+    overflow-x: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.control-carosel {
+    margin-top: 3%;
+}
+
+.card-body {
+    margin-bottom: -10px;
+    display: flex;
+}
+
+.foods-name {
+    font-size: 1.5em;
+    margin: 10%;
+    margin-bottom: -2%;
+    text-align: center;
+}
+
+.btn-order {
+    text-align: center;
+}
+
+.amount-food {
+    width: 100%;
+    text-align: center;
+}
+
+
+.single-cards {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
+    scroll-snap-align: start;
+    transition: all 0.2s;
+    font-size: 13px;
+    padding-bottom: 10px;
+}
+.card-img-top {
+    padding: 20px 20px 10px 20px;
+}
+.container {
+    max-width: 1400px;
+    padding: 0 15px;
+    margin: 70px auto;
+}
+
+
+.btn-custom {
+    align-items: center;
+    width: 20%;
+}
+
+.single-cards:hover {
+    background-color: orange;
+}
+
+.single-cards .card-title {
+    font-size: 20px;
+}
+
+.single-cards .card-content {
+    margin: 20px 0;
+    /*  max-width: 85%;*/
+}
+
+.single-cards .card-link-wrapper {
+    margin-top: auto;
+}
+
+.single-cards .card-link {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background: var(--orange);
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.single-cards:hover .card-link {
+    background: var(--darkorange);
+}
+
+@media (min-width: 500px) {
+    .card-img-top {
+        height: 150px !important;
+    }
+
+    .overall-card {
+        grid-auto-columns: calc(50% - 10px);
+        grid-column-gap: 20px;
+    }
+}
+
+@media (min-width: 700px) {
+    .card-img-top {
+        height: 150px !important;
+    }
+
+    .overall-card {
+        grid-auto-columns: calc(calc(100% / 3) - 20px);
+        grid-column-gap: 30px;
+    }
+}
+
+@media (min-width: 1100px) {
+    .card-img-top {
+        max-height: 150px !important;
+    }
+
+    .overall-card {
+        grid-auto-columns: calc(25% - 30px);
+        grid-column-gap: 40px;
+    }
+}
+
+.card-img-top {
+    max-height: 150px !important;
+}
