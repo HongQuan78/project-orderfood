@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap");
+body {
+    font-family: "Kanit", sans-serif;
+    background: #ffd230;
+}
+
+.error-check{
+    color: red !important;
+}
+
+.error{
+    padding-left: 10px !important;
+    color: red !important;
+}
+@media (min-width: 768px) {
+    .gradient-form {
+        height: 100vh !important;
+    }
+}
+@media (min-width: 769px) {
+    .gradient-custom-2 {
+        border-top-right-radius: 0.3rem;
+        border-bottom-right-radius: 0.3rem;
+    }
+}

@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap");
+
+
+body {
+    font-family: "Kanit", sans-serif;
+    background: #ffd230;
+}
+
+.error{
+    padding-left: 10px !important;
+    color: red !important;
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+}
+.card-registration .select-arrow {
+    top: 13px;
+}
