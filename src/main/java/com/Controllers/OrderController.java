@@ -30,14 +30,15 @@ import java.util.Random;
  */
 public class OrderController extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -49,10 +50,10 @@ public class OrderController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -91,8 +92,19 @@ public class OrderController extends HttpServlet {
 
     }
 
-//        response.sendRedirect("/order/payment");
- 
+    // response.sendRedirect("/order/payment");
+    public double totalPrice(String orderID) {
+        OrderDAO or = new OrderDAO();
+        FoodDAO fdao = new FoodDAO();
+        List<OrderModel> list = new ArrayList<>();
+        list = or.getOrder(orderID);
+        double totalPrice = 0;
+        for (OrderModel orderModel : list) {
+            totalPrice += fdao.getFoodPrice(orderModel.getFood_ID())
+                    * or.getOrderToCalPM(orderModel.getOrder_ID(), orderModel.getFood_ID());
+        }
+        return totalPrice;
+    }
 
     /**
      * Returns a short description of the servlet.

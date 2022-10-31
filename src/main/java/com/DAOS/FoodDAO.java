@@ -46,8 +46,6 @@ public class FoodDAO {
         return list;
     }
 
-<<<<<<< HEAD
-=======
     public ResultSet getAllCategoryID() {
         Statement st = null;
         ResultSet rs = null;
@@ -75,7 +73,6 @@ public class FoodDAO {
         return food;
     }
 
->>>>>>> 8759554 (dcmgit)
     public List<Foods> getFoodInCategory(String category_id) {
         List<Foods> list = new ArrayList<>();
         try {

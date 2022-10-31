@@ -123,8 +123,6 @@ public class OrderDAO {
         return list;
     }
 
-<<<<<<< HEAD
-=======
     public double totalPrice(String orderID) {
         OrderDAO or = new OrderDAO();
         FoodDAO fdao = new FoodDAO();
@@ -137,5 +135,4 @@ public class OrderDAO {
         }
         return totalPrice;
     }
->>>>>>> 8759554 (dcmgit)
 }

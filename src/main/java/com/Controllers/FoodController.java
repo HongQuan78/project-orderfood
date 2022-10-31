@@ -6,21 +6,14 @@ package com.Controllers;
 
 import com.DAOS.CategoryDAO;
 import com.DAOS.FoodDAO;
-<<<<<<< HEAD
-=======
 import com.Models.Foods;
->>>>>>> 8759554 (dcmgit)
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-<<<<<<< HEAD
-
-=======
 import jakarta.servlet.http.HttpSession;
->>>>>>> 8759554 (dcmgit)
 
 /**
  *
@@ -40,18 +33,13 @@ public class FoodController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD
-=======
         HttpSession session = request.getSession();
->>>>>>> 8759554 (dcmgit)
         String path = request.getRequestURI();
         if (path.startsWith("/food/list")) {
             FoodDAO foodDAO = new FoodDAO();
             CategoryDAO cateDAO = new CategoryDAO();
             request.setAttribute("listCate", cateDAO.getAllCate());
             request.getRequestDispatcher("/listfood.jsp").forward(request, response);
-<<<<<<< HEAD
-=======
         } else if (path.startsWith("/food/add")) {
             session.setAttribute("add_update", "add");
             request.getRequestDispatcher("/AddNewFood.jsp").forward(request, response);
@@ -73,7 +61,6 @@ public class FoodController extends HttpServlet {
             FoodDAO dao = new FoodDAO();
             dao.deleteFood(id);
             response.sendRedirect("/food/list");
->>>>>>> 8759554 (dcmgit)
         }
         //code thêm cái sua xoa o day
     }
@@ -89,9 +76,6 @@ public class FoodController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD
-
-=======
         HttpSession session = request.getSession();
         if (request.getParameter("btnAddNewFood") != null) {
             if (session.getAttribute("add_update").equals("add")) {
@@ -123,7 +107,6 @@ public class FoodController extends HttpServlet {
         } else {
             response.sendRedirect(e_redirect);
         }
->>>>>>> 8759554 (dcmgit)
     }
 
     /**
