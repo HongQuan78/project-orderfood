@@ -14,7 +14,7 @@
         <title>Add new food</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
-        <link rel="stylesheet" href="resouces/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath} /resouces/css/style.css">
     </head>
 
     <body>
