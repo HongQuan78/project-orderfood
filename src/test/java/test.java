@@ -65,6 +65,7 @@ public class test {
             System.out.println(mp.getPay_ID() + ", " + mp.getTable_ID() + ", " + mp.getPay_Date() + ", " + mp.getPrice_total());
             
             System.out.println(mdao.getPaymentID("PMOD-1948474300").toString());
-            
+            EmployeeDAO edao = new EmployeeDAO();
+            System.out.println(edao.getEmployeeSignIn("qan", "1").toString());
     }
 }

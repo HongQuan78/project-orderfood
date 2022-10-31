@@ -1,3 +1,5 @@
+<%@page import="com.DAOS.OrderDAO"%>
+<%@page import="com.Models.Employee"%>
 <%@page import="com.Models.MakePayment"%>
 <%@page import="com.DAOS.MakePaymentDAO"%>
 <%@page import="com.Models.OrderModel"%>
@@ -61,9 +63,10 @@
                                     <%
                                         List<OrderModel> list = (List<OrderModel>) session.getAttribute("ListOrder");
                                         FoodDAO fdao = new FoodDAO();
-
+                                        Employee emp = (Employee) session.getAttribute("employee");
+                                        OrderDAO ordao = new OrderDAO();
                                         for (OrderModel order : list) {
-                                    %>%
+                                    %>
                                     <tr>
                                         <td><%= order.getFood_ID()%></td>
                                         <td><%= fdao.getFoodName(order.getFood_ID())%></td>
@@ -80,6 +83,7 @@
                                         </td>
                                     </tr>
                                     <%}
+
                                     %>
                                 </tbody>
                             </table>
@@ -87,9 +91,10 @@
                         <hr>
                         <div style="margin-top: 20px; margin-bottom: 20px;">
                             <div class="container">
+                                <h6 style="margin-bottom: 10px;">Employee: </h6>
                                 <h6 style="margin-bottom: 10px;">Table: <%= TableID%></h6>
                                 <h6 style="margin-bottom: 10px;">Discount: 0 VNĐ</h6>
-                                <h4 style="color: green;">Order total: <%= session.getAttribute("totalPrice")%> VNĐ (VAT)</h4>
+                                <h4 style="color: green;">Order total: <%= ordao.getTotalPrice(session.getAttribute("orderID").toString()) %> VNĐ (VAT)</h4>
                                 <form action="/order">
                                     <button type="submit" name="btnPay" id="btnPay" onclick="return checkAgree()"
                                             style="background-color: green; height: 40px;"
@@ -112,30 +117,19 @@
                                         <th>Status</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
-                                    <%  String PayID = session.getAttribute("paymentID").toString();
-                                        if (PayID != null) {
-                                            out.print(PayID);
-                                            MakePaymentDAO mdao = new MakePaymentDAO();
-                                            MakePayment mp = mdao.getPaymentID(PayID);
-
-                                    %>
                                     <tr>
-                                        <td><%= PayID%></td>
                                         <td></td>
-                                        <td><%= session.getAttribute("totalPrice") %></td>
+                                        <td></td>
+                                        <td></td>
                                         <td><button type="submit" name="btnPay" id="btnPay"
                                                     class="btn btn-danger">Pay</button></td>
                                     </tr>
-                                    <%}%>
                                 </tbody>
                             </table>
                         </div>
                         <hr>
                     </div>
-
-
                     <!-- Paid -->
                     <div id="paid" class="tabcontent">
                         <div style="height: 500px; overflow:auto;">

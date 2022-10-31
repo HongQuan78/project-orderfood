@@ -83,34 +83,18 @@ public class OrderController extends HttpServlet {
                 }
             }
             HttpSession session = request.getSession();
+            session.setAttribute("orderID", orderID);
             session.setAttribute("tableID", tableID);
+            session.setAttribute("paymentID", parts);
             List<OrderModel> list = orderdao.getOrder(orderID);
-            double totalPrice = totalPrice(orderID);
-            session.setAttribute("totalPrice", totalPrice);
             session.setAttribute("ListOrder", list);
-            Employee emp = (Employee) session.getAttribute("employee");
-            String paymentID = "PM" + orderID;
-            MakePaymentDAO mpDao = new MakePaymentDAO();
-            mpDao.addNewMakePM(new MakePayment("PM" + paymentID, totalPrice, "false", "E0002", tableID));
-            session.setAttribute("paymentID", paymentID);
             request.getRequestDispatcher("/payment.jsp").forward(request, response);
         }
 
     }
 
 //        response.sendRedirect("/order/payment");
-    public double totalPrice(String orderID) {
-        OrderDAO or = new OrderDAO();
-        FoodDAO fdao = new FoodDAO();
-        List<OrderModel> list = new ArrayList<>();
-        list = or.getOrder(orderID);
-        double totalPrice = 0;
-        for (OrderModel orderModel : list) {
-            totalPrice += fdao.getFoodPrice(orderModel.getFood_ID())
-                    * or.getOrderToCalPM(orderModel.getOrder_ID(), orderModel.getFood_ID());
-        }
-        return totalPrice;
-    }
+ 
 
     /**
      * Returns a short description of the servlet.
