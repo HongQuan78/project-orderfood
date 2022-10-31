@@ -123,4 +123,19 @@ public class OrderDAO {
         return list;
     }
 
+<<<<<<< HEAD
+=======
+    public double totalPrice(String orderID) {
+        OrderDAO or = new OrderDAO();
+        FoodDAO fdao = new FoodDAO();
+        List<OrderModel> list = new ArrayList<>();
+        list = or.getOrder(orderID);
+        double totalPrice = 0;
+        for (OrderModel orderModel : list) {
+            totalPrice += fdao.getFoodPrice(orderModel.getFood_ID())
+                    * or.getOrderToCalPM(orderModel.getOrder_ID(), orderModel.getFood_ID());
+        }
+        return totalPrice;
+    }
+>>>>>>> 8759554 (dcmgit)
 }

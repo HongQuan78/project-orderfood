@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 D:\web\JSP\PrG2\src\main\java\com\Controllers\OrderController.java
 D:\web\JSP\PrG2\src\main\java\com\Models\Employee.java
 D:\web\JSP\PrG2\src\main\java\com\DAOS\OrderDAO.java
@@ -18,3 +19,25 @@ D:\web\JSP\PrG2\src\main\java\com\Controllers\AdminController.java
 D:\web\JSP\PrG2\src\main\java\com\Controllers\FoodController.java
 D:\web\JSP\PrG2\src\main\java\com\Controllers\EmployeeController.java
 D:\web\JSP\PrG2\src\main\java\com\DBConnection\DBConnection.java
+=======
+D:\project_g2\src\main\java\com\Models\Employee.java
+D:\project_g2\src\main\java\com\Models\OrderModel.java
+D:\project_g2\src\main\java\com\Controllers\FoodController.java
+D:\project_g2\src\main\java\com\DAOS\MakePaymentDAO.java
+D:\project_g2\src\main\java\com\Controllers\OrderController.java
+D:\project_g2\src\main\java\com\Models\MakePayment.java
+D:\project_g2\src\main\java\com\Controllers\AdminController.java
+D:\project_g2\src\main\java\com\DAOS\FoodDAO.java
+D:\project_g2\src\main\java\com\DAOS\CategoryDAO.java
+D:\project_g2\src\main\java\com\DAOS\TableDAO.java
+D:\project_g2\src\main\java\com\DAOS\OrderDAO.java
+D:\project_g2\src\main\java\com\Controllers\HomeController.java
+D:\project_g2\src\main\java\com\DAOS\EmployeeDAO.java
+D:\project_g2\src\main\java\com\Controllers\AccountController.java
+D:\project_g2\src\main\java\com\Models\Foods.java
+D:\project_g2\src\main\java\com\Models\Table.java
+D:\project_g2\src\main\java\com\Models\Category.java
+D:\project_g2\src\main\java\com\Controllers\EmployeeController.java
+D:\project_g2\src\main\java\com\DBConnection\DBConnection.java
+D:\project_g2\src\main\java\com\Filter\Authentication.java
+>>>>>>> 8759554 (dcmgit)

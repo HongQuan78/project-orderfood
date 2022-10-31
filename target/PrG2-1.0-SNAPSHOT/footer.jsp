@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 
+=======
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/footer.css"/>
+>>>>>>> 8759554 (dcmgit)
 <!-- Footer -->
 <footer class="bg-black text-center text-white">
     <!-- Grid container -->

@@ -46,6 +46,36 @@ public class FoodDAO {
         return list;
     }
 
+<<<<<<< HEAD
+=======
+    public ResultSet getAllCategoryID() {
+        Statement st = null;
+        ResultSet rs = null;
+        try {
+            st = connection.createStatement();
+            rs = st.executeQuery("select * from category");
+        } catch (SQLException ex) {
+            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
+
+    public Foods getFoodById(String id) {
+        Foods food = null;
+        try {
+            PreparedStatement pst = connection.prepareStatement("select * from `foods` where Food_ID = ?");
+            pst.setString(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                food = new Foods(rs.getString("Food_ID"), rs.getString("Food_name"), rs.getDouble("Price"), rs.getString("F_Status"), rs.getString("URL_img"), rs.getString("Category_ID"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return food;
+    }
+
+>>>>>>> 8759554 (dcmgit)
     public List<Foods> getFoodInCategory(String category_id) {
         List<Foods> list = new ArrayList<>();
         try {

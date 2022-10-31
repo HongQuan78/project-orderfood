@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<%@page import="com.Models.Employee"%>
+>>>>>>> 8759554 (dcmgit)
 <%@page import="com.Models.MakePayment"%>
 <%@page import="com.DAOS.MakePaymentDAO"%>
 <%@page import="com.Models.OrderModel"%>
@@ -61,7 +65,11 @@
                                     <%
                                         List<OrderModel> list = (List<OrderModel>) session.getAttribute("ListOrder");
                                         FoodDAO fdao = new FoodDAO();
+<<<<<<< HEAD
 
+=======
+                                        Employee emp = (Employee)session.getAttribute("employee");
+>>>>>>> 8759554 (dcmgit)
                                         for (OrderModel order : list) {
                                     %>%
                                     <tr>
@@ -87,6 +95,10 @@
                         <hr>
                         <div style="margin-top: 20px; margin-bottom: 20px;">
                             <div class="container">
+<<<<<<< HEAD
+=======
+                                <h6 style="margin-bottom: 10px;">Employee: <%= emp.getEmp_name() %></h6>
+>>>>>>> 8759554 (dcmgit)
                                 <h6 style="margin-bottom: 10px;">Table: <%= TableID%></h6>
                                 <h6 style="margin-bottom: 10px;">Discount: 0 VNĐ</h6>
                                 <h4 style="color: green;">Order total: <%= session.getAttribute("totalPrice")%> VNĐ (VAT)</h4>
