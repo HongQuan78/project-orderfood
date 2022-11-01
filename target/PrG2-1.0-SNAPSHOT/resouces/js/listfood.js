@@ -27,7 +27,6 @@ $('#form').submit(function (e) {
             var id = $(this).attr('id');
             var valueAndID = id.concat(",", value);
             finalValue = finalValue.concat("/", valueAndID);
-            $(this).val(valueAndID);
         }
     });
     $('#bind-value').attr('value', finalValue);

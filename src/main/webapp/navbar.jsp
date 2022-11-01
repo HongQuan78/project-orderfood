@@ -13,7 +13,10 @@
         <!-- Collapsible wrapper -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Navbar brand -->
-            <a style="color: white;" class="navbar-brand" href="#">ORDER MANAGER</a>
+
+            <a style="color: white;" class="navbar-brand" href="#">
+                <img src="${pageContext.request.contextPath}/resouces/favicon/favicon-32x32.png" class="img-fluid" alt="Logo"/>
+            </a>
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -32,7 +35,7 @@
         <div id="information" style="display: block;">
             <div class="d-flex align-items-center">
                 <!-- Icon -->
-                <a class="link-secondary me-3" href="/order/submit">
+                <a class="link-secondary me-3" href="/order">
                     <span class="badge badge-pill bg-danger"></span>
                     <i class="fas fa-shopping-cart"></i>
                 </a>

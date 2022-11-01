@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Filter.java to edit this template
- */
 package com.Filter;
 
 import com.DAOS.EmployeeDAO;
@@ -63,7 +59,7 @@ public class Authentication implements Filter {
                 session.setAttribute("admin", true);
                 res.sendRedirect("/admin");
             } else {
-                res.sendRedirect("/employee/infor");
+                res.sendRedirect("/food/list");
             }
         }
         chain.doFilter(request, response);
