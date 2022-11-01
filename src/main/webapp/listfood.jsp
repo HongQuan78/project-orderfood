@@ -13,10 +13,11 @@
 <html lang="en">
 
     <head>
+        <%@include file="importFavicon.jsp" %>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Menu</title>
         <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
         <!-- Google Fonts -->
@@ -28,7 +29,6 @@
 
     <body>
         <%@include file="navbar.jsp" %>
-        <%= session.getAttribute("checkOrder") %>
         <div class="control-carosel container-lg">
             <!-- Carousel wrapper -->
             <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
@@ -97,7 +97,9 @@
                             <img src="<%= f.getURL_img()%>" class="card-img-top"
                                  alt="Fissure in Sandstone" />
                             <div class="food-card-title">
-                                <p class="foods-name"><%= f.getFood_name()%></p>
+                                <h3 class="foods-name"><%= f.getFood_name()%></h3>
+                                <br>
+                                <h6 class="card-text text-center">Price: <%= fdao.getFoodPrice(f.getFood_ID())%></h6>
                             </div>
                             <div class="card-body">
                                 <span class="btn btn-custom btn-primary" onclick="subFood('<%= f.getFood_ID()%>')"><i class="fa-solid fa-minus"></i></span>

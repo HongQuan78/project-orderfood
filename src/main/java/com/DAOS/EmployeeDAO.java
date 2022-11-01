@@ -38,7 +38,7 @@ public class EmployeeDAO {
             st = connection.createStatement();
             rs = st.executeQuery(query);
             while (rs.next()) {
-                list.add(new Employee(rs.getString("Emp_ID"), rs.getString("Emp_name"), rs.getDate("Emp_birthday"), rs.getString("Emp_address"), rs.getString("Emp_role"), rs.getString("Emp_gender"),rs.getString("Emp_phone")));
+                list.add(new Employee(rs.getString("Emp_ID"), rs.getString("Emp_name"), rs.getDate("Emp_birthday"), rs.getString("Emp_gender"), rs.getString("Emp_phone"), rs.getString("Emp_address"), rs.getString("Emp_role"), rs.getString("Username"), rs.getString("Password")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -47,39 +47,24 @@ public class EmployeeDAO {
         return list;
     }
 
-    public Employee getEmployeeSignIn(String username, String password) {
-        ResultSet rs = null;
-        PreparedStatement pst;
+    public Employee getAccountInfor(String username, String password) {
         Employee emp = null;
+        ResultSet rs = null;
+        PreparedStatement pst = null;
         try {
-            String query = "SELECT * FROM `employee` WHERE Username = ? and Password = ?";
+            String query = "SELECT * FROM `employee` WHERE Username = ? and Password = ? ";
             pst = connection.prepareStatement(query);
             pst.setString(1, username);
             pst.setString(2, password);
             rs = pst.executeQuery();
             while (rs.next()) {
-                emp = new Employee(rs.getString("Emp_ID"), rs.getString("Emp_name"), rs.getDate("Emp_birthday"), rs.getString("Emp_address"), rs.getString("Emp_role"),rs.getString("Username"), rs.getString("Password"));
+                emp = new Employee(rs.getString("Emp_ID"), rs.getString("Emp_name"), rs.getDate("Emp_birthday"), rs.getString("Emp_gender"), rs.getString("Emp_phone"), rs.getString("Emp_address"), rs.getString("Emp_role"), rs.getString("Username"), rs.getString("Password"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return emp;
-    }
-
-    public ResultSet getAccountInfor(String username) {
-        ResultSet rs = null;
-        PreparedStatement pst = null;
-        try {
-            String query = "select * from employee where username=? ";
-            pst = connection.prepareStatement(query);
-            pst.setString(1, username);
-            rs = pst.executeQuery();
-        } catch (SQLException ex) {
-            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return rs;
     }
 
     public int addNew(Employee employee) {

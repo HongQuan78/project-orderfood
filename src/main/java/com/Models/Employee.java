@@ -15,41 +15,23 @@ public class Employee {
     private String Emp_ID;
     private String Emp_name;
     private Date Emp_birthday;
+    private String Emp_gender;
+    private String Emp_phone;
     private String Emp_address;
     private String Emp_role;
     private String Username;
     private String Password;
-    private String Emp_gender;
-    private String Emp_phone;
 
-    public Employee(String Emp_ID, String Emp_name, Date Emp_birthday, String Emp_address, String Emp_role, String Username, String Password, String Emp_gender, String Emp_phone) {
+    public Employee(String Emp_ID, String Emp_name, Date Emp_birthday, String Emp_gender, String Emp_phone, String Emp_address, String Emp_role, String Username, String Password) {
         this.Emp_ID = Emp_ID;
         this.Emp_name = Emp_name;
         this.Emp_birthday = Emp_birthday;
-        this.Emp_address = Emp_address;
-        this.Emp_role = Emp_role;
-        this.Username = Username;
-        this.Password = Password;
         this.Emp_gender = Emp_gender;
         this.Emp_phone = Emp_phone;
-    }
-
-    public Employee(String Emp_ID, String Emp_name, Date Emp_birthday, String Emp_address, String Emp_role, String Username, String Password) {
-        this.Emp_ID = Emp_ID;
-        this.Emp_name = Emp_name;
-        this.Emp_birthday = Emp_birthday;
         this.Emp_address = Emp_address;
         this.Emp_role = Emp_role;
         this.Username = Username;
         this.Password = Password;
-    }
-
-    public Employee(String Emp_ID, String Emp_name, Date Emp_birthday, String Emp_address, String Emp_role) {
-        this.Emp_ID = Emp_ID;
-        this.Emp_name = Emp_name;
-        this.Emp_birthday = Emp_birthday;
-        this.Emp_address = Emp_address;
-        this.Emp_role = Emp_role;
     }
 
     public String getEmp_ID() {

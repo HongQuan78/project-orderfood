@@ -38,7 +38,7 @@ public class MakePaymentDAO {
             st = connection.createStatement();
             rs = st.executeQuery(query);
             while (rs.next()) {
-                list.add(new MakePayment(rs.getString("PayID"),
+                list.add(new MakePayment(rs.getString("Pay_ID"),
                         rs.getDate("Pay_date"),
                         rs.getDouble("Price_total"),
                         rs.getString("MP_Status"),

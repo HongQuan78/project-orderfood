@@ -51,7 +51,8 @@ public class Authentication implements Filter {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         EmployeeDAO empDAO = new EmployeeDAO();
-        Employee employee = empDAO.getEmployeeSignIn(username, password);
+        Employee employee = empDAO.getAccountInfor(username, password);
+        req.setAttribute("error", "");
         if (employee == null) {
             req.setAttribute("error", "Cannot find your account!");
             req.getRequestDispatcher("/signin.jsp").forward(request, response);

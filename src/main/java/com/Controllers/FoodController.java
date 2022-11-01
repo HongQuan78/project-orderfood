@@ -37,6 +37,10 @@ public class FoodController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String path = request.getRequestURI();
+        if (session.getAttribute("employee") == null) {
+            response.sendRedirect("/home");
+            return;
+        }
         if (path.startsWith("/food/list")) {
             FoodDAO foodDAO = new FoodDAO();
             CategoryDAO cateDAO = new CategoryDAO();
@@ -64,6 +68,26 @@ public class FoodController extends HttpServlet {
             FoodDAO dao = new FoodDAO();
             dao.deleteFood(id);
             response.sendRedirect("/food/list");
+        } else if (path.startsWith("/food/false-")) {
+            if (session.getAttribute("admin") == null) {
+                response.sendRedirect("/home");
+                return;
+            }
+            String[] s = path.split("-");
+            String id = s[s.length - 1];
+            FoodDAO dao = new FoodDAO();
+            dao.setFoodStatus(id, "false");
+            response.sendRedirect("/admin/foodmanager");
+        } else if (path.startsWith("/food/true-")) {
+            if (session.getAttribute("admin") == null) {
+                response.sendRedirect("/home");
+                return;
+            }
+            String[] s = path.split("-");
+            String id = s[s.length - 1];
+            FoodDAO dao = new FoodDAO();
+            dao.setFoodStatus(id, "true");
+            response.sendRedirect("/admin/foodmanager");
         }
         // code thêm cái sua xoa o day
     }

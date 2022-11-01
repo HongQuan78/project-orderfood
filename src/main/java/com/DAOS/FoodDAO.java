@@ -177,6 +177,22 @@ public class FoodDAO {
         }
         return food;
     }
+    
+    public String getFoodStatus(String id) {
+        String status = null;
+        try {
+            PreparedStatement pst = connection.prepareStatement("SELECT F_Status FROM `foods` where Food_ID = ?");
+            pst.setString(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                status = rs.getString("F_Status");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    }
+    
 
     public ResultSet getAllCategoryID() {
         Statement st = null;
