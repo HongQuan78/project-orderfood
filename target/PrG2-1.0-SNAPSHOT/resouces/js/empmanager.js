@@ -26,7 +26,3 @@ $('#myTable').on("click", ".icon-delete", function (e) {
         }
     });
 });
-
-$('#myTable').on("change", "#selectStatus", function (e) {
-    location.href = $(this).val();
-});

@@ -70,8 +70,7 @@ public class test {
 //        for (MakePayment makePayment : list) {
 //            System.out.println(makePayment);
 //        }
-        String s = "PMOD-1017670909";
-        String s1 = s.substring(2);
-        System.out.println(s1);
+        FoodDAO fdao = new FoodDAO();
+        System.out.println(fdao.getFoodStatus("F00001"));
     }
 }

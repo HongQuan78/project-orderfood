@@ -10,20 +10,20 @@
 <!DOCTYPE html>
 <html>
     <head>
+         <%@include file="importFavicon.jsp" %>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin</title>
+        <title>Employeee manager</title>
         <!--boostrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
         <!--datatable-->
         <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"/>
         <!--fontawesome-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-        <!-- Font Awesome -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/sidebar.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/managerStyle.css">
     </head>
     <body id="body-pd">
         <div class="page-wrapper chiller-theme toggled">
@@ -87,7 +87,7 @@
                                     <td><%= emp.getEmp_address()%></td>
                                     <td><%= emp.getEmp_phone()%></td>
                                     <td>
-                                        <a href="/student/update/}" class="icon-a"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="#" class="icon-a"><i class="fa-solid fa-pen-to-square"></i></a>
                                     </td>
                                     <td>
                                         <a href="#" class="icon-a icon-delete" id=""><i class="fa-solid fa-trash"></i></a>

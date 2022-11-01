@@ -4,23 +4,26 @@
     Author     : vhqua
 --%>
 
+<%@page import="com.DAOS.FoodDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.Models.Foods"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <%@include file="importFavicon.jsp" %>
+        <%@include file="importFavicon.jsp" %>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin</title>
+        <title>Food manager</title>
         <!--boostrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
-        <!--datatable-->
-        <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"/>
         <!--fontawesome-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/sidebar.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/managerStyle.css">
     </head>
     <body id="body-pd">
         <div class="page-wrapper chiller-theme toggled">
@@ -55,7 +58,8 @@
             <main class="page-content">
                 <%@include file="navbar.jsp" %>
                 <div class="container-fluid">
-                    <a href="/food/add" class="btn btn-dark">Add new food</a>
+                    <a href="/food/add" class="btn btn-dark text-center">Add new food</a>
+                    <h1 class="text-center">Food Manager</h1>
                     <table id="myTable" class="display table table-hover responsive" style="width:100%">
                         <thead>
                             <tr>
@@ -69,30 +73,33 @@
                         </thead>
                         <tbody>
                             <%
+                                FoodDAO fdao = new FoodDAO();
                                 List<Foods> list = (List<Foods>) request.getAttribute("listFood");
                                 for (Foods f : list) {
                             %>
                             <tr>
                                 <td><%= f.getFood_ID()%></td>
                                 <td><%= f.getFood_name()%></td>
-                                <td><%= f.getF_Status() == "true" ? "Con hang" : "Het hang"%>
-                                    <select id="id">
+                                <td>
+                                    <select id="selectStatus" class="form-control form-select form-select-sm">
                                         <option value="choose" disabled="true">choose</option>
-                                        <option value="true">Con hang</option>
-                                        <option value="false">Het hang</option>
+                                        <option value="/food/true-<%= f.getFood_ID()%>" <%= fdao.getFoodStatus(f.getFood_ID()).equals("true") ? "selected" : ""%>>Con hang</option>
+                                        <option value="/food/false-<%= f.getFood_ID()%>"<%= fdao.getFoodStatus(f.getFood_ID()).equals("false") ? "selected" : ""%> >Het hang</option>
                                     </select>
                                 </td>
                                 <td><%= f.getPrice()%></td>
-                                <td><a href="/food/update/<%= f.getFood_ID()%>">Update</a></td>
-                                <td><a href="/food/delete/<%= f.getFood_ID()%>">Delete</a></td>
+                                <td>
+                                    <a href="#" class="icon-a"><i class="fa-solid fa-pen-to-square"></i></a>
+                                </td>
+                                <td>
+                                    <a href="#" class="icon-a icon-delete" id=""><i class="fa-solid fa-trash"></i></a>
+                                </td>
                             </tr>
                             <%
                                 }
                             %>
                         </tbody>
                     </table>
-
-
                 </div>
                 <%@include file="footer.jsp" %>
             </main>

@@ -66,7 +66,7 @@ public class AdminController extends HttpServlet {
             request.setAttribute("id", id.substring(2));
             request.setAttribute("list", list);
             request.getRequestDispatcher("/report_detail.jsp").forward(request, response);
-        }
+        } 
     }
 
     /**

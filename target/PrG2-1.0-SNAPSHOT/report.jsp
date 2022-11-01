@@ -11,20 +11,19 @@
 <!DOCTYPE html>
 <html>
     <head>
+         <%@include file="importFavicon.jsp" %>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin</title>
+        <title>Report</title>
         <!--boostrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
         <!--datatable-->
         <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"/>
         <!--fontawesome-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-        <!-- Font Awesome -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/sidebar.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/managerStyle.css">
     </head>
     <body id="body-pd">
         <div class="page-wrapper chiller-theme toggled">
@@ -61,7 +60,7 @@
                 <div class="container-fluid">
                     <h4>Total in month: </h4>
                     <div class="container">
-                        <h1 class="text-center">Employee Management</h1>
+                        <h1 class="text-center">Report</h1>
                         <table id="myTable" class="table table-hover responsive">
                             <thead>
                             <th>ID</th>
@@ -74,18 +73,18 @@
                                 <%
                                     List<MakePayment> list = (List<MakePayment>) request.getAttribute("list");
                                     for (MakePayment mp : list) {
-                                        
+
                                 %>
                                 <tr>
-                                    <td><%= mp.getPay_ID() %></td>
-                                    <td><%= mp.getPay_Date() %></td>
+                                    <td><%= mp.getPay_ID()%></td>
+                                    <td><%= mp.getPay_Date()%></td>
                                     <td><%= mp.getPrice_total()%></td>
-                                    <td><%= mp.getEmp_ID() %></td>
-                                    <td><%= mp.getTable_ID() %></td>
-                                    <td> <a href="/admin/paymentdetail/<%= mp.getPay_ID() %>">Detail</a></td>
+                                    <td><%= mp.getEmp_ID()%></td>
+                                    <td><%= mp.getTable_ID()%></td>
+                                    <td> <a href="/admin/paymentdetail/<%= mp.getPay_ID()%>">Detail</a></td>
                                 </tr>
                                 <%}
-                                    
+
                                 %>
                             </tbody>
                         </table>

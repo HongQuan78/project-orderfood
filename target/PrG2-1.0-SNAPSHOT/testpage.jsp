@@ -1,6 +1,6 @@
 <%-- 
-    Document   : error
-    Created on : Oct 28, 2022, 10:01:25 AM
+    Document   : test page
+    Created on : Oct 31, 2022, 9:40:57 AM
     Author     : vhqua
 --%>
 
@@ -8,11 +8,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <%@include file="importFavicon.jsp" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Error page!</h1>
+        <%= session.getAttribute("orderID") %>
+        <%= session.getAttribute("totalPrice") %>
     </body>
 </html>

@@ -11,10 +11,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+         <%@include file="importFavicon.jsp" %>
         <meta charset="UTF-8">
         <meta htxtp-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Add new food</title>
+        <title><%= session.getAttribute("add_update").equals("update") ? "Update food" : "Add new food"%></title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/addnewfoodstyle.css">
