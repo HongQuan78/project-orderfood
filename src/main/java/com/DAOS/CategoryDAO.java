@@ -6,7 +6,6 @@ package com.DAOS;
 
 import com.DBConnection.DBConnection;
 import com.Models.Category;
-import com.Models.Table;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -11,7 +11,7 @@
 <html>
 
     <head>
-         <%@include file="importFavicon.jsp" %>
+        <%@include file="importFavicon.jsp" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -57,25 +57,24 @@
 
                                 <tbody>
                                     <%
+                                        HashMap<String, Integer> hash = (HashMap<String, Integer>) session.getAttribute("hash");
                                         String TableID = session.getAttribute("tableID").toString();
-                                        List<OrderModel> list = (List<OrderModel>) session.getAttribute("ListOrder");
-
-                                        FoodDAO fdao = new FoodDAO();
                                         Employee emp = (Employee) session.getAttribute("employee");
+                                        FoodDAO fdao = new FoodDAO();
                                         OrderDAO ordao = new OrderDAO();
-                                        for (OrderModel order : list) {
+                                        for (String item : hash.keySet()) {
                                     %>
                                     <tr>
-                                        <td><%= order.getFood_ID()%></td>
-                                        <td><%= fdao.getFoodName(order.getFood_ID())%></td>
+                                        <td><%= item%></td>
+                                        <td><%= fdao.getFoodName(item)%></td>
                                         <td>
                                             <div class="amount-container">
-                                                <span class="btn btn-custom btn-primary" onclick="subFood('<%= order.getFood_ID()%>')"><i class="fa-solid fa-minus"></i></span>
-                                                <input type="text" class="amount-food" id="<%= order.getFood_ID()%>" name="orderfood" value="<%= order.getQuantity()%>"/>
-                                                <span class="btn btn-custom btn-primary" onclick="addFood('<%= order.getFood_ID()%>')"><i class="fa-solid fa-plus"></i></span>
+                                                <span class="btn btn-custom btn-primary" onclick="subFood('<%= item%>')"><i class="fa-solid fa-minus"></i></span>
+                                                <input type="text" class="amount-food" id="<%= item%>" name="orderfood" value="<%= hash.get(item)%>"/>
+                                                <span class="btn btn-custom btn-primary" onclick="addFood('<%= item%>')"><i class="fa-solid fa-plus"></i></span>
                                             </div>
                                         </td>
-                                        <td><%= fdao.getFoodPrice(order.getFood_ID())%></td>
+                                        <td><%= fdao.getFoodPrice(item)%></td>
                                         <td><button type="submit" name="btnRemove" class="btn btn-danger">Remove</button>
                                         </td>
                                     </tr>
@@ -91,7 +90,7 @@
                                 <h6 style="margin-bottom: 10px;">Employee: <%= emp.getEmp_name()%> </h6>
                                 <h6 style="margin-bottom: 10px;">Table: <%= TableID%></h6>
                                 <h6 style="margin-bottom: 10px;">Discount: 0 VNĐ</h6>
-                                <h4 style="color: green;">Order total: <%= ordao.getTotalPrice(session.getAttribute("orderID").toString())%> VNĐ (VAT)</h4>
+                                <h4 style="color: green;">Order total: <span id="totalPrice"></span> VNĐ (VAT)</h4>
                                 <form action="/order" method="post">
                                     <button type="submit" name="btnPay" id="btnPay" onclick="return checkAgree()"
                                             style="background-color: green; height: 40px;"

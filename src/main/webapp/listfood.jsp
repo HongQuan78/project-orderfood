@@ -103,7 +103,7 @@
                             </div>
                             <div class="card-body">
                                 <span class="btn btn-custom btn-primary" onclick="subFood('<%= f.getFood_ID()%>')"><i class="fa-solid fa-minus"></i></span>
-                                <input type="text" class="amount-food" id="<%= f.getFood_ID()%>" name="orderfood"/>
+                                <input type="text" class="amount-food" id="<%= f.getFood_ID()%>" name="orderfood" value="0"/>
                                 <span class="btn btn-custom btn-primary" onclick="addFood('<%= f.getFood_ID()%>')"><i class="fa-solid fa-plus"></i></span>
                             </div>
                         </div>
