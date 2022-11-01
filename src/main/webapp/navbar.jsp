@@ -1,3 +1,4 @@
+
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-black">
     <!-- Container wrapper -->
@@ -31,7 +32,7 @@
         <div id="information" style="display: block;">
             <div class="d-flex align-items-center">
                 <!-- Icon -->
-                <a class="link-secondary me-3" href="/order">
+                <a class="link-secondary me-3" href="/order/submit">
                     <span class="badge badge-pill bg-danger"></span>
                     <i class="fas fa-shopping-cart"></i>
                 </a>

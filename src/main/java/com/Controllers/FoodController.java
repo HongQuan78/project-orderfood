@@ -27,10 +27,10 @@ public class FoodController extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -44,8 +44,9 @@ public class FoodController extends HttpServlet {
             request.getRequestDispatcher("/listfood.jsp").forward(request, response);
         } else if (path.startsWith("/food/add")) {
             session.setAttribute("add_update", "add");
+            session.setAttribute("FOOD", null);
             request.getRequestDispatcher("/AddNewFood.jsp").forward(request, response);
-        } else if (path.startsWith("/food/update")) {
+        } else if (path.startsWith("/food/update/")) {
             String[] s = path.split("/");
             String id = s[s.length - 1];
             FoodDAO dao = new FoodDAO();
@@ -57,7 +58,7 @@ public class FoodController extends HttpServlet {
                 session.setAttribute("add_update", "update");
                 request.getRequestDispatcher("/AddNewFood.jsp").forward(request, response);
             }
-        } else if (path.startsWith("/food/delete")) {
+        } else if (path.startsWith("/food/delete/")) {
             String[] s = path.split("/");
             String id = s[s.length - 1];
             FoodDAO dao = new FoodDAO();
@@ -70,10 +71,10 @@ public class FoodController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

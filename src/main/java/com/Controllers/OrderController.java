@@ -12,16 +12,15 @@ import com.Models.MakePayment;
 import com.Models.OrderModel;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 import java.util.Random;
 
 /**
@@ -43,7 +42,32 @@ public class OrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getRequestURI();
-
+        if (path.startsWith("/order/submit")) {
+            HttpSession session = request.getSession();
+            if (session.getAttribute("checkOrder") != null) {
+                HashMap<String, Integer> hash = (HashMap<String, Integer>) session.getAttribute("mapOrder");
+                String tableID = session.getAttribute("tableID").toString();
+                String orderID = session.getAttribute("orderID").toString();
+                OrderDAO orderdao = new OrderDAO();
+                if (session.getAttribute("checkOrder") == null) {
+                    response.sendRedirect("/home");
+                    return;
+                }
+                for (String foodID : hash.keySet()) {
+                    orderdao.addNewOrder(new OrderModel(orderID, hash.get(foodID), tableID, foodID));
+                }
+                double totalPrice = orderdao.getTotalPrice(orderID);
+                MakePaymentDAO mpdao = new MakePaymentDAO();
+                Employee emp = (Employee) session.getAttribute("employee");
+                List<OrderModel> ListOrder = orderdao.getOrder(orderID);
+                session.setAttribute("ListOrder", ListOrder);
+                String paymentID = "PM" + orderID;
+                mpdao.addNewMakePM(new MakePayment(paymentID, totalPrice, "false", emp.getEmp_ID(), tableID));
+                MakePayment makePayment = mpdao.getPaymentID(paymentID);
+                session.setAttribute("makepayment", makePayment);
+            }
+            request.getRequestDispatcher("/payment.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -57,59 +81,36 @@ public class OrderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         if (request.getParameter("btnOrder1") != null) {
             String orderString = request.getParameter("bind-value");
             orderString = orderString.substring(1);
             HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
-            // split the String by a comma
             String parts[] = orderString.split("/");
-            // iterate the parts and add them to a HashMap
             String tableID = request.getParameter("tableID");
             String orderID;
             Random generator = new Random();
             orderID = "OD" + generator.nextInt();
             OrderDAO orderdao = new OrderDAO();
             for (String part : parts) {
-                // split the student data by colon to get the
-                // name and roll number
                 String orderData[] = part.split(",");
                 String OrderFoodID = orderData[0].trim();
                 int OrderFoodAmount = Integer.parseInt(orderData[1].trim());
-                // Add to map
                 hashMap.put(OrderFoodID, OrderFoodAmount);
-
-                for (String foodID : hashMap.keySet()) {
-                    orderdao.addNewOrder(new OrderModel(orderID, hashMap.get(foodID), tableID, foodID));
-                }
             }
-            HttpSession session = request.getSession();
+            session.setAttribute("checkOrder", true);
+            session.setAttribute("mapOrder", hashMap);
+            session.setAttribute("orderID", orderID);
             session.setAttribute("tableID", tableID);
-            List<OrderModel> list = orderdao.getOrder(orderID);
-            double totalPrice = totalPrice(orderID);
-            session.setAttribute("totalPrice", totalPrice);
-            session.setAttribute("ListOrder", list);
-            Employee emp = (Employee) session.getAttribute("employee");
-            String paymentID = "PM" + orderID;
-            MakePaymentDAO mpDao = new MakePaymentDAO();
-            mpDao.addNewMakePM(new MakePayment("PM" + paymentID, totalPrice, "false", "E0002", tableID));
-            session.setAttribute("paymentID", paymentID);
-            request.getRequestDispatcher("/payment.jsp").forward(request, response);
+            session.setAttribute("checkOrder", true);
+            response.sendRedirect("/order/submit");
+
+        }
+        if (request.getParameter("btnPay") != null) {
+            session.setAttribute("checkOrder", null);
+            request.getRequestDispatcher("/completedOrder.jsp").forward(request, response);
         }
 
-    }
-
-//        response.sendRedirect("/order/payment");
-    public double totalPrice(String orderID) {
-        OrderDAO or = new OrderDAO();
-        FoodDAO fdao = new FoodDAO();
-        List<OrderModel> list = new ArrayList<>();
-        list = or.getOrder(orderID);
-        double totalPrice = 0;
-        for (OrderModel orderModel : list) {
-            totalPrice += fdao.getFoodPrice(orderModel.getFood_ID())
-                    * or.getOrderToCalPM(orderModel.getOrder_ID(), orderModel.getFood_ID());
-        }
-        return totalPrice;
     }
 
     /**

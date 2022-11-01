@@ -37,42 +37,13 @@ public class FoodDAO {
             st = connection.createStatement();
             rs = st.executeQuery(query);
             while (rs.next()) {
-                Foods f = new Foods(rs.getString("Food_ID"), rs.getString("Food_name"), rs.getDouble("Price"),
-                        rs.getString("F_Status"), rs.getString("URL_img"), rs.getString("Category_ID"));
+                Foods f = new Foods(rs.getString("Food_ID"), rs.getString("Food_name"), rs.getDouble("Price"), rs.getString("F_Status"), rs.getString("URL_img"), rs.getString("Category_ID"));
                 list.add(f);
             }
         } catch (SQLException ex) {
             Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
-    }
-
-    public ResultSet getAllCategoryID() {
-        Statement st = null;
-        ResultSet rs = null;
-        try {
-            st = connection.createStatement();
-            rs = st.executeQuery("select * from category");
-        } catch (SQLException ex) {
-            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return rs;
-    }
-
-    public Foods getFoodById(String id) {
-        Foods food = null;
-        try {
-            PreparedStatement pst = connection.prepareStatement("select * from `foods` where Food_ID = ?");
-            pst.setString(1, id);
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                food = new Foods(rs.getString("Food_ID"), rs.getString("Food_name"), rs.getDouble("Price"),
-                        rs.getString("F_Status"), rs.getString("URL_img"), rs.getString("Category_ID"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return food;
     }
 
     public List<Foods> getFoodInCategory(String category_id) {
@@ -83,8 +54,7 @@ public class FoodDAO {
             pst.setString(1, category_id);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                Foods f = new Foods(rs.getString("Food_ID"), rs.getString("Food_name"), rs.getDouble("Price"),
-                        rs.getString("F_Status"), rs.getString("URL_img"), rs.getString("Category_ID"));
+                Foods f = new Foods(rs.getString("Food_ID"), rs.getString("Food_name"), rs.getDouble("Price"), rs.getString("F_Status"), rs.getString("URL_img"), rs.getString("Category_ID"));
                 list.add(f);
             }
         } catch (SQLException ex) {
@@ -112,7 +82,7 @@ public class FoodDAO {
         int count = 0;
         try {
             PreparedStatement pst = null;
-            String query = "DELETE FROM foods WHERE Food_ID = ?";
+            String query = "DELETE FROM foods WHERE `foods`.`Food_ID` = ?";
             pst = connection.prepareStatement(query);
             pst.setString(1, food_ID);
             count = pst.executeUpdate();
@@ -192,4 +162,31 @@ public class FoodDAO {
         return name;
     }
 
+    public Foods getFoodById(String id) {
+        Foods food = null;
+        try {
+            PreparedStatement pst = connection.prepareStatement("select * from `foods` where Food_ID = ?");
+            pst.setString(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                food = new Foods(rs.getString("Food_ID"), rs.getString("Food_name"), rs.getDouble("Price"),
+                        rs.getString("F_Status"), rs.getString("URL_img"), rs.getString("Category_ID"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return food;
+    }
+
+    public ResultSet getAllCategoryID() {
+        Statement st = null;
+        ResultSet rs = null;
+        try {
+            st = connection.createStatement();
+            rs = st.executeQuery("select * from category");
+        } catch (SQLException ex) {
+            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
 }

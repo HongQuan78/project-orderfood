@@ -60,11 +60,11 @@ public class test {
 //        }
     
             MakePaymentDAO mdao = new MakePaymentDAO();
-            mdao.addNewMakePM(new MakePayment("hahaa1", 20000, "false", "E0002", "T0001"));
-            MakePayment mp = mdao.getPaymentID("hahaa1");
-            System.out.println(mp.getPay_ID() + ", " + mp.getTable_ID() + ", " + mp.getPay_Date() + ", " + mp.getPrice_total());
+//            mdao.addNewMakePM(new MakePayment("hahaa1", 20000, "false", "E0002", "T0001"));
             
-            System.out.println(mdao.getPaymentID("PMOD-1948474300").toString());
             
+           mdao.setMakePMStatus("PMOD-1501798605", "true");
+           MakePayment mp = mdao.getPaymentID("PMOD-1501798605");
+           System.out.println(mp.getMP_Status());
     }
 }

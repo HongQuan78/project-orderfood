@@ -17,11 +17,10 @@
         <title>Add new food</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath} /resouces/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/addnewfoodstyle.css">
     </head>
 
     <body>
-        <%--<%@include file="/component/navbar.jsp" %>--%>
         <%@include file="navbar.jsp" %>
         <%
             Foods food = (Foods) session.getAttribute("FOOD");
@@ -32,7 +31,7 @@
                     <div class="col-12 col-lg-9 col-xl-7">
                         <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                             <div class="card-body p-4 p-md-5">
-                                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">ADD FOOD</h3>
+                                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5"><%= session.getAttribute("add_update").equals("update") ? "UPDATE" : "ADD NEW"%></h3>
                                 <form method="POST" action="FoodController" id="addnew" onsubmit="return checkAllDate()">
 
                                     <div class="row">
@@ -60,31 +59,29 @@
 
                                     <div class="row">
                                         <div class="col-md-6 mb-4 d-flex align-items-center">
-
                                             <div class="form-outline">
                                                 <label class="form-label" for="price">Price</label>
                                                 <input type="text" id="price" name="f_price" class="form-control form-control-lg"
                                                        required="required" onblur="checkPrice()" value="<%= (food != null) ? food.getPrice() : ""%>"/>
                                             </div>
                                             <div class="error" id="priceMess"></div>
-
                                         </div>
 
                                         <div class="col-md-6 mb-4">
 
                                             <div class="form-outline">
                                                 <label class="form-label" for="f_s">Food Status</label>
-                                                <input type="text" id="f_s" name="f_s" class="form-control form-control-lg"
-                                                       required="required" onblur="checkF_status()" value="<%= (food != null) ? food.getF_Status() : ""%>"/>
+                                                <select name="f_s" id = "f_s" class="form-control form-control-lg">
+                                                    <option value="choose" disabled="">Choose</option>
+                                                    <option value="true">Con hang</option>
+                                                    <option value="false">Het hang</option>
+                                                </select>
                                             </div>
-                                            </br>
                                             <div class="error" id="f_sMess"></div>
                                         </div>
                                     </div>
-
                                     <div class="row">
                                         <div class="col-md-6 mb-4 pb-2 txt">
-
                                             <div class="form-outline ">
                                                 <label class="form-label" for="img">URL Image</label>
                                                 <input type="tel" id="img" name="f_img" class="form-control form-control-lg"
@@ -106,7 +103,7 @@
                                                 <%
                                                     while (rs.next()) {
                                                 %>
-                                                <option value="<%= rs.getString("Category_ID") %>" <%= (food != null && food.getCategory_ID().equals(rs.getString("Category_ID"))) ? "selected" : ""%> ><%= rs.getString("Category_Name")%></option>
+                                                <option value="<%= rs.getString("Category_ID")%>" <%= (food != null && food.getCategory_ID().equals(rs.getString("Category_ID"))) ? "selected" : ""%> ><%= rs.getString("Category_Name")%></option>
                                                 <%
                                                     }
                                                 %>
@@ -128,7 +125,7 @@
         <%@include file="footer.jsp" %>
         <!--Jquery-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-        <script src="resouces/js/addfood.js"></script>
-        <script src="resouces/js/randomfoodid.js"></script>
+        <script src="${pageContext.request.contextPath}/resouces/js/addfood.js"></script>
+        <script src="${pageContext.request.contextPath}/resouces/js/randomfoodid.js"></script>
     </body>
 </html>

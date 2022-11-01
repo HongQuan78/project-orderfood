@@ -87,7 +87,7 @@
         <!--tabledata-->
         <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         <!--Jquery-->
-        <script language = "Javascript" src="resouces/libaries/jquery-3.6.1.min.js"></script>
+        <script language = "Javascript" src="${pageContext.request.contextPath}/resouces/libaries/jquery-3.6.1.min.js"></script>
         <!-- MDB -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
         <script src="${pageContext.request.contextPath}/resouces/js/sidebar.js"></script>

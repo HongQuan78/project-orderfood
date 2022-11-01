@@ -5,7 +5,9 @@
 package com.Controllers;
 
 import com.DAOS.EmployeeDAO;
+import com.DAOS.FoodDAO;
 import com.Models.Employee;
+import com.Models.Foods;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -38,12 +40,15 @@ public class AdminController extends HttpServlet {
             response.sendRedirect("/home");
             return;
         }
-        if (path.endsWith("/admin")||path.endsWith("/admin/employeemanager")) {
+        if (path.endsWith("/admin") || path.endsWith("/admin/employeemanager")) {
             EmployeeDAO empDAO = new EmployeeDAO();
             List<Employee> listEmp = empDAO.getAll();
             request.setAttribute("listEmp", listEmp);
             request.getRequestDispatcher("/employeemanager.jsp").forward(request, response);
         } else if (path.endsWith("/admin/foodmanager")) {
+            FoodDAO foodDAO = new FoodDAO();
+            List<Foods> list = foodDAO.getAllFood();
+            request.setAttribute("listFood", list);
             request.getRequestDispatcher("/foodmanager.jsp").forward(request, response);
         } else if (path.endsWith("/admin/report")) {
             request.getRequestDispatcher("/report.jsp").forward(request, response);
