@@ -37,19 +37,10 @@
                             Please select purchase order for more information
                         </span>
                     </div>
-                    <div style="margin-top: 30px;">
-                        <form action="home.html">
-                            <button type="submit" name="btnHome" id="btnHome"
-                                    style="background-color: green; width: 100%; height: 45px;"
-                                    class="form-control btn btn-primary rounded submit px-3">Back to home</button>
-                        </form>
-                    </div>
                     <div style="margin-top: 20px;">
-                        <form action="payment.html">
-                            <button type="submit" name="btnHome" id="btnHome"
-                                    style="background-color: chocolate; width: 100; height: 45px;"
-                                    class="form-control btn btn-primary rounded submit px-3">View purchase order</button>
-                        </form>
+                        <a href="/home" type="submit" name="btnHome" id="btnHome"
+                           style="background-color: chocolate; width: 100; height: 45px;"
+                           class="form-control btn btn-primary rounded submit px-3">Back to menu</a>
                     </div>
                 </div>
             </div>
@@ -60,7 +51,7 @@
         <script language = "Javascript" src="resouces/libaries/jquery-3.6.1.min.js"></script>
         <!-- MDB -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
-        
+
     </body>
 
 </html>

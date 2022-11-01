@@ -4,11 +4,14 @@
  */
 package com.Controllers;
 
+import com.DAOS.EmployeeDAO;
+import com.Models.Employee;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -29,7 +32,7 @@ public class EmployeeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getRequestURI();
-        if(path.startsWith("/employee/infor")){
+        if (path.startsWith("/employee/infor")) {
             request.getRequestDispatcher("/Profile.jsp").forward(request, response);
         }
     }

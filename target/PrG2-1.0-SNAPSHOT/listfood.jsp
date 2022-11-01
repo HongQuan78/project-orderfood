@@ -28,6 +28,7 @@
 
     <body>
         <%@include file="navbar.jsp" %>
+        <%= session.getAttribute("checkOrder") %>
         <div class="control-carosel container-lg">
             <!-- Carousel wrapper -->
             <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
@@ -109,7 +110,9 @@
                 </ul>
                 <%}%>
                 <input type="text" id="bind-value" value = "" name="bind-value" style="display: none">
-                <button name="btnOrder1" type="submit" class="btn btn-primary">Order now</button>
+                <div class="hihidiv">
+                    <button name="btnOrder1" type="submit" id="btnOrder" class="btn btn-primary">Order now</button>
+                </div>
             </div>
         </form>
         <%@include file="footer.jsp" %>

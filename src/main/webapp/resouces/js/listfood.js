@@ -1,8 +1,8 @@
-function hihi() {
-    alert("hihi");
-
-}
-;
+$(document).ready(function () {
+    $('#form').each(function () {
+        this.reset();
+    });
+});
 
 function addFood(id) {
     var value = document.getElementById(id).value;
@@ -27,15 +27,9 @@ $('#form').submit(function (e) {
             var id = $(this).attr('id');
             var valueAndID = id.concat(",", value);
             finalValue = finalValue.concat("/", valueAndID);
-
-            alert(valueAndID);
             $(this).val(valueAndID);
         }
     });
-    alert(finalValue);
     $('#bind-value').attr('value', finalValue);
 });
 
-$('#form').each(function () {
-    this.reset();
-});

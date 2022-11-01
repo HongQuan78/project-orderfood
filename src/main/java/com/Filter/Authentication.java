@@ -51,21 +51,22 @@ public class Authentication implements Filter {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         EmployeeDAO empDAO = new EmployeeDAO();
-        Employee employee = empDAO.getEmployeeSignIn(username, password);
-        chain.doFilter(request, response);
+        Employee employee = empDAO.getAccountInfor(username, password);
+        req.setAttribute("error", "");
         if (employee == null) {
             req.setAttribute("error", "Cannot find your account!");
             req.getRequestDispatcher("/signin.jsp").forward(request, response);
-            return;
-        }
-        HttpSession session = req.getSession();
-        session.setAttribute("employee", employee);
-        if (employee.getEmp_role().equals("admin")) {
-            session.setAttribute("admin", true);
-            res.sendRedirect("/admin");
         } else {
-            res.sendRedirect("/employee/infor");
+            HttpSession session = req.getSession();
+            session.setAttribute("employee", employee);
+            if (employee.getEmp_role().equals("admin")) {
+                session.setAttribute("admin", true);
+                res.sendRedirect("/admin");
+            } else {
+                res.sendRedirect("/employee/infor");
+            }
         }
+        chain.doFilter(request, response);
     }
 
     /**

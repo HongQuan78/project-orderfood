@@ -33,9 +33,8 @@ public class AccountController extends HttpServlet {
         String path = request.getRequestURI();
         HttpSession session = request.getSession();
         if (path.startsWith("/account/signout")) {
-            session.setAttribute("employee", null);
-            session.setAttribute("admin", null);
-            request.getRequestDispatcher("/signin.jsp").forward(request, response);
+            session.invalidate();
+            response.sendRedirect("/home");
         }
     }
 

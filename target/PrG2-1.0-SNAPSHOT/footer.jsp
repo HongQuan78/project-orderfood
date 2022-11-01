@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/footer.css"/>
+
 <!-- Footer -->
 <footer class="bg-black text-center text-white">
     <!-- Grid container -->
@@ -103,4 +103,5 @@
     </div>
     <!-- Copyright -->
 </footer>
+
 

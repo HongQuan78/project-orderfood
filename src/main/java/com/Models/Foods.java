@@ -70,6 +70,5 @@ public class Foods {
     public void setCategory_ID(String Category_ID) {
         this.Category_ID = Category_ID;
     }
-    
-    
+       
 }
