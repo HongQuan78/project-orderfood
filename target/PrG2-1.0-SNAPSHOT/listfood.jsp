@@ -81,6 +81,9 @@
             <div class="row">
                 <a href="/table/booking" class="btn btn-dark">Choose Table</a>
             </div>
+            <div class="row my-5">
+                <h3 class="">Table: <%= session.getAttribute("tableID")==null?"Chua chon ban":session.getAttribute("tableID").toString() %></h3>
+            </div>
         </div>
 
         <form action="/order" method="post" id="form">
@@ -119,15 +122,6 @@
                 <div class="btn-order-container">
                     <button name="btnOrder1" type="submit" id="btnOrder" class="btn btn-dark btn-lg">Order now</button>
                 </div>
-                <style>
-                    .btn-order-container{
-                        position: fixed;
-                        bottom: 0;
-                        right: 0;
-                        margin-right: 10px;
-                        margin-bottom: 10px;
-                    }
-                </style>
             </div>
         </form>
         <%@include file="footer.jsp" %>

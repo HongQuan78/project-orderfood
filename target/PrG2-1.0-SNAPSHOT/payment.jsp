@@ -76,10 +76,10 @@
                                         <td><%= item%></td>
                                         <td><%= fdao.getFoodName(item)%></td>
                                         <td>
-                                            <div class="amount-container">
-                                                <a href="/order/dec/<%=item%>" class="btn btn-custom btn-primary"><i class="fa-solid fa-minus"></i></a>
+                                            <div class="amount-container container-fluid">
+                                                <a href="/order/dec/<%=item%>" class="btn btn-custom btn-dark"><i class="fa-solid fa-minus"></i></a>
                                                 <input type="text" class="amount-food" id="<%= item%>" name="orderfood" value="<%= hash.get(item)%>"/>
-                                                <a href="/order/inc/<%=item%>" class="btn btn-custom btn-primary"><i class="fa-solid fa-plus"></i></a>
+                                                <a href="/order/inc/<%=item%>" class="btn btn-custom btn-dark"><i class="fa-solid fa-plus"></i></a>
                                             </div>
                                         </td>
                                         <td><%= fdao.getFoodPrice(item)%> </td>

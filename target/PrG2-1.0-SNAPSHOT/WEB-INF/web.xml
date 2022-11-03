@@ -14,7 +14,8 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>Authentication</filter-name>
-        <servlet-name>AccountController</servlet-name>
+        <url-pattern>/account/signin</url-pattern>
+        <!--<servlet-name>AccountController</servlet-name>-->
     </filter-mapping>
     <servlet>
         <servlet-name>AccountController</servlet-name>

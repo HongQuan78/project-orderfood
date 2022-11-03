@@ -47,10 +47,18 @@ public class FoodController extends HttpServlet {
             request.setAttribute("listCate", cateDAO.getAllCate());
             request.getRequestDispatcher("/listfood.jsp").forward(request, response);
         } else if (path.startsWith("/food/add")) {
+            if (session.getAttribute("admin") == null) {
+                response.sendRedirect("/home");
+                return;
+            }
             session.setAttribute("add_update", "add");
             session.setAttribute("FOOD", null);
             request.getRequestDispatcher("/AddNewFood.jsp").forward(request, response);
         } else if (path.startsWith("/food/update/")) {
+            if (session.getAttribute("admin") == null) {
+                response.sendRedirect("/home");
+                return;
+            }
             String[] s = path.split("/");
             String id = s[s.length - 1];
             FoodDAO dao = new FoodDAO();
@@ -63,6 +71,10 @@ public class FoodController extends HttpServlet {
                 request.getRequestDispatcher("/AddNewFood.jsp").forward(request, response);
             }
         } else if (path.startsWith("/food/delete/")) {
+            if (session.getAttribute("admin") == null) {
+                response.sendRedirect("/home");
+                return;
+            }
             String[] s = path.split("/");
             String id = s[s.length - 1];
             FoodDAO dao = new FoodDAO();
@@ -108,9 +120,9 @@ public class FoodController extends HttpServlet {
         HttpSession session = request.getSession();
         if (request.getParameter("btnAddNewFood") != null) {
             if (session.getAttribute("add_update").equals("add")) {
-                foodPost("/food/list", "/food/add", "add", request, response);
+                foodPost("/admin/foodmanager", "/food/add", "add", request, response);
             } else if (session.getAttribute("add_update").equals("update")) {
-                foodPost("/food/list", "/food/update", "update", request, response);
+                foodPost("/admin/foodmanager", "/food/update", "update", request, response);
             }
         }
     }

@@ -170,3 +170,23 @@ input[type=number] {
 .carousel-img{
     height: 500px;
 }
+
+.btn-order-container{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+nav{
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+.carousel-inner{
+    padding-top: 40px;
+    position: static !important;
+}

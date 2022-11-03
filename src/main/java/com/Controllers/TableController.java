@@ -34,12 +34,17 @@ public class TableController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getRequestURI();
+        if(path.startsWith("/table/admin/change/")){
+        
+        }
+        
         if (path.startsWith("/table/booking")) {
             TableDAO tableDAO = new TableDAO();
             List<Table> list = tableDAO.getAllTable();
             request.setAttribute("list", list);
             request.getRequestDispatcher("/tablebooking.jsp").forward(request, response);
         }
+        
         if (path.startsWith("/table/change/")) {
             String[] s = path.split("/");
             String id = s[s.length - 1];

@@ -51,6 +51,9 @@
                             <li>
                                 <a href="/admin/report">Report</a>
                             </li>
+                             <li>
+                                <a href="/admin/table">Table</a>
+                            </li>
                         </ul>
                     </div>
             </nav>
@@ -71,7 +74,6 @@
                             <th>Table</th>
                             </thead>
                             <tbody>
-                                <%= request.getAttribute("id") %>
                                 <%
                                     List<OrderModel> list = (List<OrderModel>) request.getAttribute("list");
                                     FoodDAO fdao = new FoodDAO();

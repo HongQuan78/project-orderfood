@@ -8,10 +8,12 @@ import com.DAOS.EmployeeDAO;
 import com.DAOS.FoodDAO;
 import com.DAOS.MakePaymentDAO;
 import com.DAOS.OrderDAO;
+import com.DAOS.TableDAO;
 import com.Models.Employee;
 import com.Models.Foods;
 import com.Models.MakePayment;
 import com.Models.OrderModel;
+import com.Models.Table;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -58,6 +60,11 @@ public class AdminController extends HttpServlet {
             List<MakePayment> mp = mpdao.getAllMakePM();
             session.setAttribute("list", mp);
             request.getRequestDispatcher("/report.jsp").forward(request, response);
+        } else if (path.endsWith("/admin/table")) {
+            TableDAO tdao = new TableDAO();
+            List<Table> list = tdao.getAllTable();
+            session.setAttribute("list", list);
+            request.getRequestDispatcher("/tablemanager.jsp").forward(request, response);
         } else if (path.startsWith("/admin/paymentdetail/")) {
             String[] s = path.split("/");
             String id = s[s.length - 1];

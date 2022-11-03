@@ -35,7 +35,7 @@
                                         <div class="text-center">
                                             <h4 class="mt-1 mb-5 pb-1">Sign in</h4>
                                         </div>
-                                        <form action="account" method="post" id="signinForm">
+                                        <form action="/account/signin" method="post" id="signinForm">
                                             <p>Please login to your account</p>
                                             <div class="form-outline mb-4">
                                                 <input

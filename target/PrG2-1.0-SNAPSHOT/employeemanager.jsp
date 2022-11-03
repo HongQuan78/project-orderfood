@@ -50,6 +50,9 @@
                             <li>
                                 <a href="/admin/report">Report</a>
                             </li>
+                            <li>
+                                <a href="/admin/table">Table</a>
+                            </li>
                         </ul>
                     </div>
             </nav>
