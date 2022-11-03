@@ -1,6 +1,6 @@
 <%-- 
-    Document   : test page
-    Created on : Oct 31, 2022, 9:40:57 AM
+    Document   : test
+    Created on : Nov 3, 2022, 8:22:39 AM
     Author     : vhqua
 --%>
 
@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%= session.getAttribute("orderID") %>
-        <%= session.getAttribute("totalPrice") %>
+        <h1><%= session.getAttribute("tableID") %></h1>
+        
     </body>
 </html>

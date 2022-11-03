@@ -26,3 +26,7 @@ $('#myTable').on("click", ".icon-delete", function (e) {
         }
     });
 });
+
+$('#selectMonth').on("change","#month", function (e) {
+    location.href = $(this).val();
+});

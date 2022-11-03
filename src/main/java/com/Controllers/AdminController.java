@@ -56,7 +56,7 @@ public class AdminController extends HttpServlet {
         } else if (path.endsWith("/admin/report")) {
             MakePaymentDAO mpdao = new MakePaymentDAO();
             List<MakePayment> mp = mpdao.getAllMakePM();
-            request.setAttribute("list", mp);
+            session.setAttribute("list", mp);
             request.getRequestDispatcher("/report.jsp").forward(request, response);
         } else if (path.startsWith("/admin/paymentdetail/")) {
             String[] s = path.split("/");
@@ -66,7 +66,16 @@ public class AdminController extends HttpServlet {
             request.setAttribute("id", id.substring(2));
             request.setAttribute("list", list);
             request.getRequestDispatcher("/report_detail.jsp").forward(request, response);
-        } 
+        } else if (path.startsWith("/admin/report/")) {
+            String[] s = path.split("/");
+            String month = s[s.length - 1];
+            MakePaymentDAO mpdao = new MakePaymentDAO();
+            session.setAttribute("month", month);
+            session.setAttribute("rp", mpdao.getTotalInMonth(month));
+            response.sendRedirect("/admin/report");
+        } else {
+            response.sendRedirect("/error");
+        }
     }
 
     /**

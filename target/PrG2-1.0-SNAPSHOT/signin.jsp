@@ -43,7 +43,6 @@
                                                     id="username"
                                                     class="form-control"
                                                     name="username"
-                                                    placeholder="Username"
                                                     autocomplete="off"
                                                     />
                                                 <label class="form-label" for="username"

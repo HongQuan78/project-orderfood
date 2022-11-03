@@ -25,11 +25,12 @@
         <!-- MDB -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/listfood.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/navbar.css">
     </head>
 
     <body>
         <%@include file="navbar.jsp" %>
-        <div class="control-carosel container-lg">
+        <div class="control-carosel container-sm">
             <!-- Carousel wrapper -->
             <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
                 <!-- Indicators -->
@@ -47,19 +48,17 @@
                     <!-- Single item -->
                     <div class="carousel-item active">
                         <img src="https://img.freepik.com/free-photo/delicious-vietnamese-food-including-pho-ga-noodles-spring-rolls-white-table_181624-34062.jpg?w=1380&t=st=1666840620~exp=1666841220~hmac=9838750129f9cce32aa6c88f7a6d02c1a2e9dd6c5cfbbb50ebb3bc9ad071fad0"
-                             class="d-block w-100" alt="Food 1" />
+                             class="d-block w-100 carousel-img img-responsive img-fluid" alt="Food 1" />
                     </div>
-
                     <!-- Single item -->
                     <div class="carousel-item">
                         <img src="https://img.freepik.com/free-photo/fried-spring-rolls-cutting-board_1150-17010.jpg?w=1380&t=st=1666840652~exp=1666841252~hmac=b53bb4bf73df71eaa506586548aa36b643b587aac139b16c2926bdf5f218f7c3"
-                             class="d-block w-100" alt="Food 2" />
+                             class="d-block w-100 carousel-img" alt="Food 2" />
                     </div>
-
                     <!-- Single item -->
                     <div class="carousel-item">
                         <img src="https://img.freepik.com/free-photo/quail-eggs-stew-with-belly-pork-chinese-food_1205-10115.jpg?w=1380&t=st=1666840678~exp=1666841278~hmac=7ccd4b36edcb00ef298cc7f400baae6eda10c5865ef7f69e3c6fad84b10fa52e"
-                             class="d-block w-100" alt="Food 3" />
+                             class="d-block w-100 carousel-img" alt="Food 3" />
                     </div>
                 </div>
                 <!-- Inner -->
@@ -78,10 +77,15 @@
             </div>
             <!-- Carousel wrapper -->
         </div>
+        <div class="container">
+            <div class="row">
+                <a href="/table/booking" class="btn btn-dark">Choose Table</a>
+            </div>
+        </div>
+
         <form action="/order" method="post" id="form">
             <div class="container">
-                <input type="text" id="tbID" name="tableID">
-                <%
+                <%  
                     List<Category> listCate = (List<Category>) request.getAttribute("listCate");
                     for (Category cate : listCate) {
                 %>
@@ -102,9 +106,9 @@
                                 <h6 class="card-text text-center">Price: <%= fdao.getFoodPrice(f.getFood_ID())%></h6>
                             </div>
                             <div class="card-body">
-                                <span class="btn btn-custom btn-primary" onclick="subFood('<%= f.getFood_ID()%>')"><i class="fa-solid fa-minus"></i></span>
-                                <input type="text" class="amount-food" id="<%= f.getFood_ID()%>" name="orderfood" value="0"/>
-                                <span class="btn btn-custom btn-primary" onclick="addFood('<%= f.getFood_ID()%>')"><i class="fa-solid fa-plus"></i></span>
+                                <span class="btn btn-custom btn-dark" onclick="subFood('<%= f.getFood_ID()%>')"><i class="fa-solid fa-minus"></i></span>
+                                <input type="number" class="amount-food" id="<%= f.getFood_ID()%>" name="orderfood" value="0"/>
+                                <span class="btn btn-custom btn-dark" onclick="addFood('<%= f.getFood_ID()%>')"><i class="fa-solid fa-plus"></i></span>
                             </div>
                         </div>
                     </li>
@@ -112,9 +116,18 @@
                 </ul>
                 <%}%>
                 <input type="text" id="bind-value" value = "" name="bind-value" style="display: none">
-                <div class="hihidiv">
-                    <button name="btnOrder1" type="submit" id="btnOrder" class="btn btn-primary">Order now</button>
+                <div class="btn-order-container">
+                    <button name="btnOrder1" type="submit" id="btnOrder" class="btn btn-dark btn-lg">Order now</button>
                 </div>
+                <style>
+                    .btn-order-container{
+                        position: fixed;
+                        bottom: 0;
+                        right: 0;
+                        margin-right: 10px;
+                        margin-bottom: 10px;
+                    }
+                </style>
             </div>
         </form>
         <%@include file="footer.jsp" %>

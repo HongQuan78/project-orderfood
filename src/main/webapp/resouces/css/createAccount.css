@@ -3,7 +3,7 @@
 
 body {
     font-family: "Kanit", sans-serif;
-    background: #ffd230;
+    background: #FFEF82;
 }
 
 .error{
@@ -20,3 +20,8 @@ body {
 .card-registration .select-arrow {
     top: 13px;
 }
+
+select{
+    width: 100%;
+}
+

@@ -58,7 +58,6 @@
             <main class="page-content">
                 <%@include file="navbar.jsp" %>
                 <div class="container-fluid">
-                    <a href="/food/add" class="btn btn-dark text-center">Add new food</a>
                     <h1 class="text-center">Food Manager</h1>
                     <table id="myTable" class="display table table-hover responsive" style="width:100%">
                         <thead>
@@ -89,10 +88,10 @@
                                 </td>
                                 <td><%= f.getPrice()%></td>
                                 <td>
-                                    <a href="#" class="icon-a"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="/food/update/<%= f.getFood_ID()%>" class="icon-a"><i class="fa-solid fa-pen-to-square"></i></a>
                                 </td>
                                 <td>
-                                    <a href="#" class="icon-a icon-delete" id=""><i class="fa-solid fa-trash"></i></a>
+                                    <a href="#" class="icon-a icon-delete" id="<%= f.getFood_ID()%>"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                             <%
@@ -100,6 +99,9 @@
                             %>
                         </tbody>
                     </table>
+                </div>
+                <div class="row">
+                    <a href="/food/add" class="btn btn-dark text-center">Add new food</a>
                 </div>
                 <%@include file="footer.jsp" %>
             </main>

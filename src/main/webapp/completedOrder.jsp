@@ -28,20 +28,15 @@
                             <h1 style="color: green;">ORDER SUCCESS</h1>
                         </span>
                     </div>
-                    <div>
-                        <span>
-                            Order ID: 8965F1A4AC84F
-                        </span>
-                    </div>
+
                     <div style="margin-top: 5px;">
                         <span>
-                            Please select purchase order for more information
+                            Thank you
                         </span>
                     </div>
-                    <div style="margin-top: 20px;">
+                    <div class="a-container" style="margin-top: 20px;">
                         <a href="/home" type="submit" name="btnHome" id="btnHome"
-                           style="background-color: chocolate; width: 100; height: 45px;"
-                           class="form-control btn btn-primary rounded submit px-3">Back to menu</a>
+                           class="form-control btn btn-dark rounded submit px-3">Back to menu</a>
                     </div>
                 </div>
             </div>

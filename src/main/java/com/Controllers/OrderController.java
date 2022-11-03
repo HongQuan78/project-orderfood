@@ -19,8 +19,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.HashMap;
-import java.util.List;
-
 import java.util.Random;
 
 /**
@@ -42,12 +40,51 @@ public class OrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("checkOrder") == null) {
-            response.sendRedirect("/home");
+        String path = request.getRequestURI();
+        if (path.startsWith("/order/dec/")) {
+            String[] s = path.split("/");
+            String id = s[s.length - 1];
+            HashMap<String, Integer> hash = (HashMap<String, Integer>) session.getAttribute("hash");
+            hash.put(id, hash.get(id) > 0 ? hash.get(id) - 1 : 0);
+            if (hash.get(id) == 0) {
+                hash.remove(id);
+            }
+            session.setAttribute("hash", hash);
+            response.sendRedirect("/order");
             return;
         }
-        request.getRequestDispatcher("/payment.jsp").forward(request, response);
+        if (path.startsWith("/order/inc/")) {
+            String[] s = path.split("/");
+            String id = s[s.length - 1];
+            HashMap<String, Integer> hash = (HashMap<String, Integer>) session.getAttribute("hash");
+            hash.put(id, hash.get(id) + 1);
+            session.setAttribute("hash", hash);
+            response.sendRedirect("/order");
+            return;
+        }
+        if (path.startsWith("/order/del/")) {
+            String[] s = path.split("/");
+            String id = s[s.length - 1];
+            HashMap<String, Integer> hash = (HashMap<String, Integer>) session.getAttribute("hash");
+            hash.remove(id);
+            session.setAttribute("hash", hash);
+            response.sendRedirect("/order");
+            return;
+        }
 
+        request.getRequestDispatcher("/payment.jsp").forward(request, response);
+    }
+
+    public HashMap<String, Integer> getOrderList(String param) {
+        HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+        String parts[] = param.split("/");
+        for (String part : parts) {
+            String orderData[] = part.split(",");
+            String OrderFoodID = orderData[0].trim();
+            int OrderFoodAmount = Integer.parseInt(orderData[1].trim());
+            hashMap.put(OrderFoodID, OrderFoodAmount);
+        }
+        return hashMap;
     }
 
     /**
@@ -64,41 +101,36 @@ public class OrderController extends HttpServlet {
         HttpSession session = request.getSession();
         if (request.getParameter("btnOrder1") != null) {
             String orderString = request.getParameter("bind-value");
-
-            orderString = orderString.substring(1);
-            HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
-            String parts[] = orderString.split("/");
-            String tableID = request.getParameter("tableID");
-            session.setAttribute("tableID", tableID);
-            String orderID;
-            for (String part : parts) {
-                String orderData[] = part.split(",");
-                String OrderFoodID = orderData[0].trim();
-                int OrderFoodAmount = Integer.parseInt(orderData[1].trim());
-                hashMap.put(OrderFoodID, OrderFoodAmount);
+            if(orderString.isEmpty()){
+                response.sendRedirect("/food/list");
+                return; 
             }
-            session.setAttribute("checkOrder", true);
+            HashMap<String, Integer> hashMap = getOrderList(orderString.substring(1));
             session.setAttribute("hash", hashMap);
-            session.setAttribute("tableID", tableID);
             session.setAttribute("checkOrder", true);
             response.sendRedirect("/order");
         }
         if (request.getParameter("btnPay") != null) {
             HashMap<String, Integer> hash = (HashMap<String, Integer>) session.getAttribute("hash");
+            if (hash.isEmpty()) {
+                response.sendRedirect("/home");
+                return;
+            }
             String tableID = session.getAttribute("tableID").toString();
-            String orderID;
+            Employee emp = (Employee) session.getAttribute("employee");
             Random generator = new Random();
-            orderID = "OD" + generator.nextInt();
             OrderDAO orderdao = new OrderDAO();
+            MakePaymentDAO mpdao = new MakePaymentDAO();
+            String orderID = "OD" + generator.nextInt();
             for (String foodID : hash.keySet()) {
                 orderdao.addNewOrder(new OrderModel(orderID, hash.get(foodID), tableID, foodID));
             }
             double totalPrice = orderdao.getTotalPrice(orderID);
-            MakePaymentDAO mpdao = new MakePaymentDAO();
-            Employee emp = (Employee) session.getAttribute("employee");
             String paymentID = "PM" + orderID;
             mpdao.addNewMakePM(new MakePayment(paymentID, totalPrice, "false", emp.getEmp_ID(), tableID));
             session.setAttribute("checkOrder", null);
+            session.setAttribute("hash", null);
+            session.setAttribute("tableID", null);
             request.getRequestDispatcher("/completedOrder.jsp").forward(request, response);
         }
 

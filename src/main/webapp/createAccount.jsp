@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-         <%@include file="importFavicon.jsp" %>
+        <%@include file="importFavicon.jsp" %>
         <!-- Font Awesome -->
         <link
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -19,7 +19,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css"
             rel="stylesheet"
             />
-        <link rel="stylesheet" href="resouces/css/createAccount.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/createAccount.css" />
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,16 +27,13 @@
     </head>
     <body>
         <%@include file="navbar.jsp" %>
-        <section class="vh-100 gradient-custom">
+        <section class="gradient-custom">
             <div class="container py-5 h-100">
                 <div class="row justify-content-center align-items-center h-100">
                     <div class="col-12 col-lg-9 col-xl-7">
-                        <div
-                            class="card shadow-2-strong card-registration"
-                            style="border-radius: 15px"
-                            >
+                        <div class="card shadow-2-strong card-registration" style="border-radius: 15px">
                             <div class="card-body p-4 p-md-5">
-                                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Create account</h3>
+                                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5"><%= request.getAttribute("update") == null ? "Create employee's account" : "Update employee's infor"%></h3>
                                 <form action="account" method="post" id="empForm">
                                     <div class="row">
                                         <div class="col-md-6 mb-4">
@@ -165,7 +162,7 @@
                                             <label class="form-label select-label"
                                                    >Choose option</label
                                             >
-                                            <select class="select form-control-lg" name="role">
+                                            <select class="select form-control-lg form-select-lg" name="role">
                                                 <option value="1" disabled>Choose option</option>
                                                 <option value="2">Nhan vien</option>
                                                 <option value="3">Quan ly</option>
@@ -175,10 +172,10 @@
 
                                     <div class="mt-4 pt-2">
                                         <input
-                                            class="btn btn-primary btn-lg"
+                                            class="btn btn-outline-dark btn-lg"
                                             type="submit"
                                             value="Submit"
-                                            name="btnCreate"
+                                            name="<%= request.getAttribute("update") == null ? "btnAdd" : "btnUpdate"%>"
                                             />
                                     </div>
                                 </form>
@@ -190,12 +187,9 @@
         </section>
         <%@include file="footer.jsp" %>
         <!-- MDB -->
-        <script
-            type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"
-        ></script>
-        <script language="Javascript" src="resouces/libaries/jquery-3.6.1.min.js"></script>
-        <script language="Javascript" src="resouces/libaries/jquery.validate.js"></script>
-        <script language="Javascript" src="resouces/js/validateCreateUpdate.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+        <script language="Javascript" src="${pageContext.request.contextPath}/resouces/libaries/jquery-3.6.1.min.js"></script>
+        <script language="Javascript" src="${pageContext.request.contextPath}/resouces/libaries/jquery.validate.js"></script>
+        <script language="Javascript" src="${pageContext.request.contextPath}/resouces/js/validateCreateUpdate.js"></script>
     </body>
 </html>

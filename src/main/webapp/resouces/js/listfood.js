@@ -13,7 +13,7 @@ function addFood(id) {
 
 function subFood(id) {
     var value = document.getElementById(id).value;
-    value == 0 ? "0" : value--;
+    value <= 0 ? "0" : value--;
     $("#" + id).attr("value", parseInt(value));
     $("#" + id).val(value);
 }
@@ -32,3 +32,6 @@ $('#form').submit(function (e) {
     $('#bind-value').attr('value', finalValue);
 });
 
+$("#form").on("change",function(){
+        $("#btnOrder").hide();
+});

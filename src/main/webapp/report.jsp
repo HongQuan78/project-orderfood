@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <%@include file="importFavicon.jsp" %>
+        <%@include file="importFavicon.jsp" %>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,7 +58,31 @@
             <main class="page-content">
                 <%@include file="navbar.jsp" %>
                 <div class="container-fluid">
-                    <h4>Total in month: </h4>
+                    <div class="row r1">
+                        <div class="col-4 col-auto">
+                            <h4 class="form-label">Total in <%= session.getAttribute("month") == null ? "" : session.getAttribute("month").toString()%>: <%= session.getAttribute("rp") == null ? "" : session.getAttribute("rp").toString()%> VND</h4>
+                        </div>
+                        <div class="col-6">
+                            <form id="selectMonth">
+                                <select id="month" class="form-control-lg form-select-sm">
+                                    <%
+                                        int month = 1;
+                                        if (session.getAttribute("month") != null) {
+                                            month = Integer.parseInt(session.getAttribute("month").toString());
+                                        }
+                                        for (int i = 1; i <= 12; i++) {
+                                    %>
+                                    <option value="/admin/report/<%= i%>" <%= month == i ? "selected" : ""%>>Thang <%= i%></option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
+                            </form>
+                        </div>
+
+                    </div>
+
+
                     <div class="container">
                         <h1 class="text-center">Report</h1>
                         <table id="myTable" class="table table-hover responsive">
@@ -68,10 +92,11 @@
                             <th>Price</th>
                             <th>Employee</th>
                             <th>Table</th>
+                            <th></th>
                             </thead>
                             <tbody>
                                 <%
-                                    List<MakePayment> list = (List<MakePayment>) request.getAttribute("list");
+                                    List<MakePayment> list = (List<MakePayment>) session.getAttribute("list");
                                     for (MakePayment mp : list) {
 
                                 %>

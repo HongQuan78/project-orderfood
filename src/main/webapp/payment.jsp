@@ -27,18 +27,25 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/paymentcss.css"/>
     </head>
     <%@include file="navbar.jsp" %>
-    <body style="background-color:#FFD230;">
+    <body>
         <!-- User -->
         <div class="container" style="background-color: white; margin-top: 80px; padding: 10px 5px 10px 5px;">
             <div class="justify-content-center">
                 <div style="padding: 15px 20px 15px 20px">
-
                     <!-- Tabs -->
                     <div class="tab">
                         <button id="default" class="tablinks" style="color: blue;"
                                 onclick="openCity(event, 'order')">Order</button>
                     </div>
                     <%
+                        if (session.getAttribute("tableID") == null) {
+                    %>
+                    <div>
+                        <a href="/table/booking" class="btn btn-block btn-lg btn-dark text-center my-5 py-1 ">Please choose a table</a>
+                    </div>
+
+                    <%
+                    } else {
                         if (session.getAttribute("checkOrder") != null) {
                     %>
                     <!-- Order -->
@@ -54,7 +61,6 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
                                     <%
                                         HashMap<String, Integer> hash = (HashMap<String, Integer>) session.getAttribute("hash");
@@ -62,44 +68,47 @@
                                         Employee emp = (Employee) session.getAttribute("employee");
                                         FoodDAO fdao = new FoodDAO();
                                         OrderDAO ordao = new OrderDAO();
+                                        double totalPrice = 0;
                                         for (String item : hash.keySet()) {
                                     %>
                                     <tr>
+
                                         <td><%= item%></td>
                                         <td><%= fdao.getFoodName(item)%></td>
                                         <td>
                                             <div class="amount-container">
-                                                <span class="btn btn-custom btn-primary" onclick="subFood('<%= item%>')"><i class="fa-solid fa-minus"></i></span>
+                                                <a href="/order/dec/<%=item%>" class="btn btn-custom btn-primary"><i class="fa-solid fa-minus"></i></a>
                                                 <input type="text" class="amount-food" id="<%= item%>" name="orderfood" value="<%= hash.get(item)%>"/>
-                                                <span class="btn btn-custom btn-primary" onclick="addFood('<%= item%>')"><i class="fa-solid fa-plus"></i></span>
+                                                <a href="/order/inc/<%=item%>" class="btn btn-custom btn-primary"><i class="fa-solid fa-plus"></i></a>
                                             </div>
                                         </td>
-                                        <td><%= fdao.getFoodPrice(item)%></td>
-                                        <td><button type="submit" name="btnRemove" class="btn btn-danger">Remove</button>
+                                        <td><%= fdao.getFoodPrice(item)%> </td>
+                                        <td><a href="/order/del/<%=item%>" name="btnRemove" class="btn btn-danger">Remove</a>
                                         </td>
                                     </tr>
-                                    <%}
+                                    <%  totalPrice += fdao.getFoodPrice(item) * hash.get(item);
+                                        }
                                     %>
                                 </tbody>
 
                             </table>
                         </div>
                         <hr>
-                        <div style="margin-top: 20px; margin-bottom: 20px;">
-                            <div class="container">
+                        <div class="container bot-container" style="margin-top: 20px; margin-bottom: 20px;">
+                            <div class="container-fluid">
                                 <h6 style="margin-bottom: 10px;">Employee: <%= emp.getEmp_name()%> </h6>
                                 <h6 style="margin-bottom: 10px;">Table: <%= TableID%></h6>
                                 <h6 style="margin-bottom: 10px;">Discount: 0 VNĐ</h6>
-                                <h4 style="color: green;">Order total: <span id="totalPrice"></span> VNĐ (VAT)</h4>
+                                <h4 style="color: green;">Order total: <%= totalPrice%> VNĐ (VAT)</h4>
                                 <form action="/order" method="post">
-                                    <button type="submit" name="btnPay" id="btnPay" onclick="return checkAgree()"
+                                    <button type="submit" name="btnPay" id="btnPay"
                                             style="background-color: green; height: 40px;"
                                             class="form-control btn btn-primary rounded submit px-3">ORDER</button>
                                 </form>
                             </div>
 
                         </div>
-                        <%
+                        <%}
                             }
                         %>
                     </div>

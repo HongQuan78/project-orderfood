@@ -67,7 +67,7 @@ public class FoodController extends HttpServlet {
             String id = s[s.length - 1];
             FoodDAO dao = new FoodDAO();
             dao.deleteFood(id);
-            response.sendRedirect("/food/list");
+            response.sendRedirect("/admin/foodmanager");
         } else if (path.startsWith("/food/false-")) {
             if (session.getAttribute("admin") == null) {
                 response.sendRedirect("/home");
@@ -88,6 +88,8 @@ public class FoodController extends HttpServlet {
             FoodDAO dao = new FoodDAO();
             dao.setFoodStatus(id, "true");
             response.sendRedirect("/admin/foodmanager");
+        } else {
+            response.sendRedirect("/error");
         }
         // code thêm cái sua xoa o day
     }

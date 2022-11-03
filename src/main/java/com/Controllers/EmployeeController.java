@@ -5,7 +5,9 @@
 package com.Controllers;
 
 import com.DAOS.EmployeeDAO;
+import com.DAOS.FoodDAO;
 import com.Models.Employee;
+import com.Models.Foods;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -35,6 +37,31 @@ public class EmployeeController extends HttpServlet {
         if (path.startsWith("/employee/infor")) {
             request.getRequestDispatcher("/Profile.jsp").forward(request, response);
         }
+        if (path.startsWith("/employee/employeemanager/admin/add")) {
+            
+            request.getRequestDispatcher("/createAccount.jsp").forward(request, response);
+        }
+        if (path.startsWith("/employee/employeemanager/admin/update/")) {
+            request.setAttribute("update", "update");
+            String[] s = path.split("/");
+            String id = s[s.length - 1];
+            request.getRequestDispatcher("/createAccount.jsp").forward(request, response);
+        }
+        if (path.startsWith("/employee/employeemanager/admin/delete/")) {
+            request.setAttribute("update", "update");
+            String[] s = path.split("/");
+            String id = s[s.length - 1];
+            EmployeeDAO empdao = new EmployeeDAO();
+            empdao.delete(id);
+            response.sendRedirect("/admin/employeemanager");
+        } else {
+            response.sendRedirect("/error");
+        }
+    }
+
+    public Employee getEmp(HttpServletRequest request, HttpServletResponse response) {
+
+        return null;
     }
 
     /**
@@ -48,6 +75,9 @@ public class EmployeeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getParameter("btn-add") != null) {
+
+        }
     }
 
     /**

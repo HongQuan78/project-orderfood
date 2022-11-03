@@ -35,6 +35,8 @@ public class AccountController extends HttpServlet {
         if (path.startsWith("/account/signout")) {
             session.invalidate();
             response.sendRedirect("/home");
+        } else {
+            response.sendRedirect("/error");
         }
     }
 

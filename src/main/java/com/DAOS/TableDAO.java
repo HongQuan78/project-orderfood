@@ -100,4 +100,20 @@ public class TableDAO {
         return count;
     }
 
+    public Table getTable(String id) {
+        Table table = null;
+        try {
+            String query = "SELECT * FROM `table` WHERE `Table_ID` LIKE ?";
+            PreparedStatement pst = connection.prepareStatement(query);
+            pst.setString(1, id);
+            ResultSet resultSet = pst.executeQuery();
+            while (resultSet.next()) {
+                table = new Table(resultSet.getString("Table_ID"), resultSet.getString("T_Status"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return table;
+    }
+
 }
