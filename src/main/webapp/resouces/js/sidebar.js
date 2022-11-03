@@ -1,6 +1,11 @@
 jQuery(function ($) {
+    $(document).ready(function () {
+
+        $(".page-wrapper").removeClass("toggled");
+
+    });
     $(".sidebar-dropdown > a").click(function () {
-        $(".sidebar-submenu").slideUp(200);
+//        $(".sidebar-submenu").slideUp(200);
         if ($(this).parent().hasClass("active")) {
             $(".sidebar-dropdown").removeClass("active");
             $(this).parent().removeClass("active");
@@ -18,3 +23,4 @@ jQuery(function ($) {
         $(".page-wrapper").addClass("toggled");
     });
 });
+

@@ -48,7 +48,7 @@
             <!-- Github -->
             <a
                 class="btn btn-outline-light btn-floating m-1"
-                href="#!"
+                href="https://github.com/Quanvo313/project"
                 role="button"
                 ><i class="fab fa-github"></i
                 ></a>
@@ -59,10 +59,7 @@
         <!-- Section: Text -->
         <section class="mb-4">
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-                distinctio earum repellat quaerat voluptatibus placeat nam, commodi
-                optio pariatur est quia magnam eum harum corrupti dicta, aliquam
-                sequi voluptate quas.
+               Dia chi: Nguyen Van Cu, An Binh, Ninh Kieu, Can Tho 900000
             </p>
         </section>
         <!-- Section: Text -->
@@ -99,7 +96,7 @@
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
         © 2022 Copyright:
-        <a class="text-white" href="https://mdbootstrap.com/">G2</a>
+        <a class="text-white" href="https://github.com/Quanvo313/project">G2</a>
     </div>
     <!-- Copyright -->
 </footer>

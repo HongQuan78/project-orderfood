@@ -3,11 +3,15 @@
 
 body {
     font-family: "Kanit", sans-serif;
-    background: #ffd230;
+    /*background: #ffd230;*/
     
 }
 
 a{
     text-decoration: none !important;
     color: black;
+}
+
+.r1{
+    margin-bottom: 50px;
 }

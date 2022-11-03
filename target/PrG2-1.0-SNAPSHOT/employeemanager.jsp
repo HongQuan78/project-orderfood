@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <%@include file="importFavicon.jsp" %>
+        <%@include file="importFavicon.jsp" %>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,6 +50,9 @@
                             <li>
                                 <a href="/admin/report">Report</a>
                             </li>
+                            <li>
+                                <a href="/admin/table">Table</a>
+                            </li>
                         </ul>
                     </div>
             </nav>
@@ -87,7 +90,7 @@
                                     <td><%= emp.getEmp_address()%></td>
                                     <td><%= emp.getEmp_phone()%></td>
                                     <td>
-                                        <a href="#" class="icon-a"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="/employee/employeemanager/admin/update/<%= emp.getEmp_ID() %>" class="icon-a"><i class="fa-solid fa-pen-to-square"></i></a>
                                     </td>
                                     <td>
                                         <a href="#" class="icon-a icon-delete" id=""><i class="fa-solid fa-trash"></i></a>
@@ -99,6 +102,9 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="row">
+                    <a href="/employee/employeemanager/admin/add" class="btn btn-dark text-center">Add new account</a>
                 </div>
                 <%@include file="footer.jsp" %>
             </main>

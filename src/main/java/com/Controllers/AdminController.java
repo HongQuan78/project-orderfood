@@ -8,10 +8,12 @@ import com.DAOS.EmployeeDAO;
 import com.DAOS.FoodDAO;
 import com.DAOS.MakePaymentDAO;
 import com.DAOS.OrderDAO;
+import com.DAOS.TableDAO;
 import com.Models.Employee;
 import com.Models.Foods;
 import com.Models.MakePayment;
 import com.Models.OrderModel;
+import com.Models.Table;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -56,8 +58,13 @@ public class AdminController extends HttpServlet {
         } else if (path.endsWith("/admin/report")) {
             MakePaymentDAO mpdao = new MakePaymentDAO();
             List<MakePayment> mp = mpdao.getAllMakePM();
-            request.setAttribute("list", mp);
+            session.setAttribute("list", mp);
             request.getRequestDispatcher("/report.jsp").forward(request, response);
+        } else if (path.endsWith("/admin/table")) {
+            TableDAO tdao = new TableDAO();
+            List<Table> list = tdao.getAllTable();
+            session.setAttribute("list", list);
+            request.getRequestDispatcher("/tablemanager.jsp").forward(request, response);
         } else if (path.startsWith("/admin/paymentdetail/")) {
             String[] s = path.split("/");
             String id = s[s.length - 1];
@@ -66,7 +73,16 @@ public class AdminController extends HttpServlet {
             request.setAttribute("id", id.substring(2));
             request.setAttribute("list", list);
             request.getRequestDispatcher("/report_detail.jsp").forward(request, response);
-        } 
+        } else if (path.startsWith("/admin/report/")) {
+            String[] s = path.split("/");
+            String month = s[s.length - 1];
+            MakePaymentDAO mpdao = new MakePaymentDAO();
+            session.setAttribute("month", month);
+            session.setAttribute("rp", mpdao.getTotalInMonth(month));
+            response.sendRedirect("/admin/report");
+        } else {
+            response.sendRedirect("/error");
+        }
     }
 
     /**

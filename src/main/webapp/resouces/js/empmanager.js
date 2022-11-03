@@ -19,7 +19,7 @@ $('#myTable').on("click", ".icon-delete", function (e) {
         if (result.isConfirmed) {
             Swal.fire('Saved!', '', 'success');
             setTimeout(() => {
-                window.location.href = "/student/delete/" + id;
+                window.location.href = "/employee/employeemanager/admin/delete/" + id;
             }, 1000);
         } else if (result.isDenied) {
             Swal.fire('Changes are not saved', '', 'info');

@@ -3,7 +3,7 @@
 
 body {
     font-family: "Kanit", sans-serif !important;
-    background-color: #FFD230;
+    background: #FFEF82;
 }
 
 /* Style the tab */
@@ -53,4 +53,8 @@ body {
 
 #amountTH{
     text-align: center !important;
+}
+
+.container{
+    margin-bottom: 50px;
 }

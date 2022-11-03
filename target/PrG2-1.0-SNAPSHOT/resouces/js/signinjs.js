@@ -5,7 +5,10 @@ $('#signinForm').validate({
     },
     messages: {
         username: {
-            required: "Please enter user name"
+            required: "Please enter your user name"
+        },
+        password: {
+            required: "Please enter your password"
         }
     }
 });

@@ -125,4 +125,20 @@ public class MakePaymentDAO {
         }
         return mp;
     }
+    public double getTotalInMonth(String month) {
+        double total = 0;
+        try {
+            PreparedStatement pst = null;
+            String query = "SELECT SUM(Price_total) as s FROM `make_payments` WHERE MONTH(Pay_date) = ?";
+            pst = connection.prepareStatement(query);
+            pst.setString(1, month);
+            ResultSet resultSet = pst.executeQuery();
+            while (resultSet.next()) {
+                total = resultSet.getDouble("s");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
 }

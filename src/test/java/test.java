@@ -70,7 +70,11 @@ public class test {
 //        for (MakePayment makePayment : list) {
 //            System.out.println(makePayment);
 //        }
-        FoodDAO fdao = new FoodDAO();
-        System.out.println(fdao.getFoodStatus("F00001"));
+        TableDAO t = new TableDAO();
+        System.out.println(t.getTable("T0001"));
+        MakePaymentDAO mpdao = new MakePaymentDAO();
+        System.out.println(mpdao.getTotalInMonth("11"));
+        EmployeeDAO emp = new EmployeeDAO();
+        emp.delete("E0001");
     }
 }

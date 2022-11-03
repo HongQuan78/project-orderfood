@@ -12,6 +12,10 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -44,8 +48,15 @@ public class Authentication implements Filter {
             throws IOException, ServletException {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpServletRequest req = (HttpServletRequest) request;
+        MD5en md = new MD5en();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        
+        try {
+            password = md.encrypt(password);
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            Logger.getLogger(Authentication.class.getName()).log(Level.SEVERE, null, ex);
+        }
         EmployeeDAO empDAO = new EmployeeDAO();
         Employee employee = empDAO.getAccountInfor(username, password);
         req.setAttribute("error", "");

@@ -33,7 +33,7 @@ public class FoodDAO {
         try {
             Statement st = null;
             ResultSet rs = null;
-            String query = "select * from `foods`";
+            String query = "SELECT * FROM `foods` WHERE `Validate` LIKE 'true'";
             st = connection.createStatement();
             rs = st.executeQuery(query);
             while (rs.next()) {
@@ -49,7 +49,7 @@ public class FoodDAO {
     public List<Foods> getFoodInCategory(String category_id) {
         List<Foods> list = new ArrayList<>();
         try {
-            String query = "SELECT * FROM foods WHERE foods.Category_ID = ?";
+            String query = "SELECT * FROM `foods` WHERE `Validate` LIKE 'true' AND `Category_ID` LIKE ?";
             PreparedStatement pst = connection.prepareStatement(query);
             pst.setString(1, category_id);
             ResultSet rs = pst.executeQuery();
@@ -82,7 +82,7 @@ public class FoodDAO {
         int count = 0;
         try {
             PreparedStatement pst = null;
-            String query = "DELETE FROM foods WHERE `foods`.`Food_ID` = ?";
+            String query = "UPDATE `foods` SET `Validate` = 'false' WHERE `foods`.`Food_ID` = ?";
             pst = connection.prepareStatement(query);
             pst.setString(1, food_ID);
             count = pst.executeUpdate();
@@ -95,7 +95,8 @@ public class FoodDAO {
     public int addNewFood(Foods food) {
         int count = 0;
         try {
-            String query = "Insert into foods values (?,?,?,?,?,?)";
+            String query = "INSERT INTO `foods` (`Food_ID`, `Food_name`, `Price`, `F_Status`, `URL_img`, `Validate`, `Category_ID`) "
+                    + "VALUES (?, ?, ?, ?, ?, 'true', ?);";
             PreparedStatement pst = connection.prepareStatement(query);
             pst.setString(1, food.getFood_ID());
             pst.setString(2, food.getFood_name());
@@ -177,7 +178,7 @@ public class FoodDAO {
         }
         return food;
     }
-    
+
     public String getFoodStatus(String id) {
         String status = null;
         try {
@@ -192,7 +193,6 @@ public class FoodDAO {
         }
         return status;
     }
-    
 
     public ResultSet getAllCategoryID() {
         Statement st = null;
