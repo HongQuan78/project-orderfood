@@ -4,6 +4,7 @@
     Author     : vhqua
 --%>
 
+<%@page import="com.Models.Employee"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,25 +18,33 @@
             />
         <!-- MDB -->
         <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css"
+            href="${pageContext.request.contextPath}/resouces/libaries/mdb.min.css"
             rel="stylesheet"
             />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/createAccount.css" />
     </head>
     <body>
+        <%
+            Employee emp = null;
+            Boolean check = request.getAttribute("update") == null;
+            if (!check) {
+                emp = (Employee) request.getAttribute("empUpdate");
+            }
+        %>
         <%@include file="navbar.jsp" %>
-        <section class="vh-100 gradient-custom">
-            <div class="container py-5 h-100">
+        <section class="gradient-custom">
+            <div class="container py-5">
                 <div class="row justify-content-center align-items-center h-100">
                     <div class="col-12 col-lg-9 col-xl-7">
                         <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                             <div class="card-body p-4 p-md-5">
-                                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5"><%= request.getAttribute("update") == null ? "Add new employee" : "Update employee's infor"%></h3>
-                                <form action="account" method="post">
+                                <h3><%= request.getAttribute("error")%></h3>
+                                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">ADD NEW</h3>
+                                <form action="/account" method="post" id="empForm">
                                     <div class="row">
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline">
-                                                <input type="text" id="empID" class="form-control form-control-lg" name="empID"/>
+                                                <input type="text" id="empID" class="form-control form-control-lg" name="empID" value="<%= check == false ? emp.getEmp_ID() : ""%>"/>
                                                 <label class="form-label" for="empID">Employee ID</label>
                                             </div>
 
@@ -43,7 +52,7 @@
                                         <div class="col-md-6 mb-4">
 
                                             <div class="form-outline">
-                                                <input type="text" id="empName" class="form-control form-control-lg" name="empName"/>
+                                                <input type="text" id="empName" class="form-control form-control-lg" name="empName" value="<%= check == false ? emp.getEmp_name() : ""%>"/>
                                                 <label class="form-label" for="empName">Full name</label>
                                             </div>
 
@@ -52,7 +61,7 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline">
-                                                <input type="text" id="empUsername" class="form-control form-control-lg" name="empUsername"/>
+                                                <input type="text" id="empUsername" class="form-control form-control-lg" name="empUsername" value="<%= check == false ? emp.getUsername() : ""%>"/>
                                                 <label class="form-label" for="empUsername">Username</label>
                                             </div>
 
@@ -60,7 +69,7 @@
                                         <div class="col-md-6 mb-4">
 
                                             <div class="form-outline">
-                                                <input type="password" id="empPass" class="form-control form-control-lg" name="empPass"/>
+                                                <input type="password" id="empPass" class="form-control form-control-lg" name="empPass" />
                                                 <label class="form-label" for="empPass">Password</label>
                                             </div>
 
@@ -70,18 +79,26 @@
                                         <div class="col-md-6 mb-4 d-flex align-items-center">
 
                                             <div class="form-outline datepicker w-100">
-                                                <input type="date" class="form-control form-control-lg" id="birthdayDate" name="birthdayDate"/>
+                                                <input type="date" class="form-control form-control-lg" id="birthdayDate" name="birthdayDate" value="<%= check == false ? emp.getEmp_birthday() : ""%>"/>
                                                 <label for="birthdayDate" class="form-label">Birthday</label>
                                             </div>
 
                                         </div>
-                                        
+                                        <div class="col-md-6 mb-4">
+
+                                            <div class="form-outline">
+                                                <input type="tel" id="empPhone" class="form-control form-control-lg" name="empPhone" value="<%= check == false ? emp.getEmp_phone() : ""%>"/>
+                                                <label class="form-label" for="empPhone">Phone number</label>
+                                            </div>
+
+                                        </div>
+
                                     </div>
 
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-outline">
-                                                <input type="text" id="address" class="form-control form-control-lg" name = "address"/>
+                                                <input type="text" id="address" class="form-control form-control-lg" name = "address" value="<%= check == false ? emp.getEmp_address() : ""%>"/>
                                                 <label class="form-label" for="emailAddress">Address</label>
                                             </div>
 
@@ -92,14 +109,15 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-4">
                                             <label class="form-label select-label">Choose option</label>
-                                            <select class="select form-control-lg">
+                                            <select class="select form-control-lg" name="role" id="role">
                                                 <option value="1" disabled>Choose option</option>
-                                                <option value="admin">Quan ly</option>
-                                                <option value="emp">Nhan vien</option>
+                                                <option value="admin">Quản lý</option>
+                                                <option value="emp" selected>Nhân viên</option>
                                             </select>    
                                         </div>
                                         <div class="col-md-6 mb-4">
-                                            <h6 class="mb-2 pb-1">Gender: </h6>
+                                            <label class="form-label select-label mb-2 pb-1">Gender</label>
+                                            <br>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="gender" id="gender"
                                                        value="Nu" checked />
@@ -115,9 +133,8 @@
                                     </div>
 
                                     <div class="mt-4 pt-2">
-                                        <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+                                        <button class="btn btn-primary btn-lg" type="submit" name="<%= request.getAttribute("update") == null ? "btnCreate" : "btnUpdate"%>"> Submit </button>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
@@ -126,10 +143,10 @@
             </div>
         </section>
         <%@include file="footer.jsp" %>
-        <!-- MDB -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
         <script language="Javascript" src="${pageContext.request.contextPath}/resouces/libaries/jquery-3.6.1.min.js"></script>
         <script language="Javascript" src="${pageContext.request.contextPath}/resouces/libaries/jquery.validate.js"></script>
         <script language="Javascript" src="${pageContext.request.contextPath}/resouces/js/validateCreateUpdate.js"></script>
+        <!-- MDB -->
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resouces/libaries/mdb.min.js"></script>
     </body>
 </html>

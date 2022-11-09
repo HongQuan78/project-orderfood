@@ -2,9 +2,9 @@
 
 
 body {
-    font-family: "Kanit", sans-serif;
+    font-family: "Kanit", sans-serif !important;
     /*background: #ffd230;*/
-    
+
 }
 
 a{

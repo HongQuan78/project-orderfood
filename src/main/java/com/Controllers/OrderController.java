@@ -39,6 +39,10 @@ public class OrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        if (session.getAttribute("employee") == null) {
+            response.sendRedirect("/home");
+            return;
+        }
         String path = request.getRequestURI();
         if (path.startsWith("/order/dec/")) {
             String[] s = path.split("/");
@@ -100,9 +104,9 @@ public class OrderController extends HttpServlet {
         HttpSession session = request.getSession();
         if (request.getParameter("btnOrder1") != null) {
             String orderString = request.getParameter("bind-value");
-            if(orderString.isEmpty()){
+            if (orderString.isEmpty()) {
                 response.sendRedirect("/food/list");
-                return; 
+                return;
             }
             HashMap<String, Integer> hashMap = getOrderList(orderString.substring(1));
             session.setAttribute("hash", hashMap);
@@ -126,7 +130,7 @@ public class OrderController extends HttpServlet {
             }
             double totalPrice = orderdao.getTotalPrice(orderID);
             String paymentID = "PM" + orderID;
-            mpdao.addNewMakePM(new MakePayment(paymentID, totalPrice, "false", emp.getEmp_ID(), tableID));
+            mpdao.addNewMakePM(new MakePayment(paymentID, totalPrice, emp.getEmp_ID(), tableID));
             session.setAttribute("checkOrder", null);
             session.setAttribute("hash", null);
             session.setAttribute("tableID", null);

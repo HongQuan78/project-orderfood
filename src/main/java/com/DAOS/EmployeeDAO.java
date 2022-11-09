@@ -66,17 +66,18 @@ public class EmployeeDAO {
     public int addNew(Employee employee) {
         int count = 0;
         try {
-            String query = "Insert into employee values (?,?,?,?,?,?,?)";
+            String query = "Insert into employee values (?,?,?,?,?,?,?,?,?)";
             PreparedStatement pst = connection.prepareStatement(query);
             pst.setString(1, employee.getEmp_ID());
             pst.setString(2, employee.getEmp_name());
             pst.setDate(3, employee.getEmp_birthday());
-            pst.setString(4, employee.getEmp_address());
-            pst.setString(5, employee.getEmp_role());
-            pst.setString(6, employee.getUsername());
-            pst.setString(7, employee.getPassword());
+            pst.setString(4, employee.getEmp_gender());
+            pst.setString(5, employee.getEmp_phone());
+            pst.setString(6, employee.getEmp_address());
+            pst.setString(7, employee.getEmp_role());
+            pst.setString(8, employee.getUsername());
+            pst.setString(9, employee.getPassword());
             count = pst.executeUpdate();
-            System.out.println(count);
             return count;
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -117,5 +118,21 @@ public class EmployeeDAO {
             Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return count;
+    }
+
+    public Employee getEmp(String id) {
+        Employee emp = null;
+        try {
+            String query = "select * from employee where Emp_ID = ?";
+            PreparedStatement pst = connection.prepareStatement(query);
+            pst.setString(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                emp = new Employee(rs.getString("Emp_ID"), rs.getString("Emp_name"), rs.getDate("Emp_birthday"), rs.getString("Emp_gender"), rs.getString("Emp_phone"), rs.getString("Emp_address"), rs.getString("Emp_role"), rs.getString("Username"), rs.getString("Password"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return emp;
     }
 }

@@ -11,7 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -32,28 +32,33 @@ public class EmployeeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getRequestURI();
+        HttpSession session = request.getSession();
+        if (session.getAttribute("employee") == null) {
+            response.sendRedirect("/home");
+            return;
+        }
         if (path.startsWith("/employee/infor")) {
             request.getRequestDispatcher("/Profile.jsp").forward(request, response);
         }
-        if (path.startsWith("/employee/employeemanager/admin/add")) {
-            request.getRequestDispatcher("/test.jsp").forward(request, response);
+        if (path.startsWith("/employee/admin/")) {
+            if (session.getAttribute("admin") == null) {
+                response.sendRedirect("/home");
+                return;
+            } else if (path.endsWith("/admin/add")) {
+                request.getRequestDispatcher("/addemp.jsp").forward(request, response);
+                return;
+            } else if (path.startsWith("/employee/admin/update/")) {
+                request.setAttribute("update", "update");
+                String[] s = path.split("/");
+                String id = s[s.length - 1];
+                EmployeeDAO edao = new EmployeeDAO();
+                Employee emp = edao.getEmp(id);
+                request.setAttribute("empUpdate", emp);
+                request.getRequestDispatcher("/addemp.jsp").forward(request, response);
+                return;
+            }
         }
-        if (path.startsWith("/employee/employeemanager/admin/update/")) {
-            request.setAttribute("update", "update");
-            String[] s = path.split("/");
-            String id = s[s.length - 1];
-            request.getRequestDispatcher("/createAccount.jsp").forward(request, response);
-        }
-        if (path.startsWith("/employee/employeemanager/admin/delete/")) {
-            request.setAttribute("update", "update");
-            String[] s = path.split("/");
-            String id = s[s.length - 1];
-            EmployeeDAO empdao = new EmployeeDAO();
-            empdao.delete(id);
-            response.sendRedirect("/admin/employeemanager");
-        } else {
-            response.sendRedirect("/error");
-        }
+
     }
 
     public Employee getEmp(HttpServletRequest request, HttpServletResponse response) {

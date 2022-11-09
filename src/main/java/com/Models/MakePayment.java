@@ -15,23 +15,20 @@ public class MakePayment {
     private String Pay_ID;
     private Date Pay_Date;
     private double Price_total;
-    private String MP_Status;
     private String Emp_ID;
     private String Table_ID;
 
-    public MakePayment(String Pay_ID, double Price_total, String MP_Status, String Emp_ID, String Table_ID) {
+    public MakePayment(String Pay_ID, double Price_total, String Emp_ID, String Table_ID) {
         this.Pay_ID = Pay_ID;
         this.Price_total = Price_total;
-        this.MP_Status = MP_Status;
         this.Emp_ID = Emp_ID;
         this.Table_ID = Table_ID;
     }
 
-    public MakePayment(String Pay_ID, Date Pay_Date, double Price_total, String MP_Status, String Emp_ID, String Table_ID) {
+    public MakePayment(String Pay_ID, Date Pay_Date, double Price_total, String Emp_ID, String Table_ID) {
         this.Pay_ID = Pay_ID;
         this.Pay_Date = Pay_Date;
         this.Price_total = Price_total;
-        this.MP_Status = MP_Status;
         this.Emp_ID = Emp_ID;
         this.Table_ID = Table_ID;
     }
@@ -60,14 +57,6 @@ public class MakePayment {
         this.Price_total = Price_total;
     }
 
-    public String getMP_Status() {
-        return MP_Status;
-    }
-
-    public void setMP_Status(String MP_Status) {
-        this.MP_Status = MP_Status;
-    }
-
     public String getEmp_ID() {
         return Emp_ID;
     }
@@ -86,7 +75,7 @@ public class MakePayment {
 
     @Override
     public String toString() {
-        return "MakePayment{" + "Pay_ID=" + Pay_ID + ", Pay_Date=" + Pay_Date + ", Price_total=" + Price_total + ", MP_Status=" + MP_Status + ", Emp_ID=" + Emp_ID + ", Table_ID=" + Table_ID + '}';
+        return "MakePayment{" + "Pay_ID=" + Pay_ID + ", Pay_Date=" + Pay_Date + ", Price_total=" + Price_total + ", Emp_ID=" + Emp_ID + ", Table_ID=" + Table_ID + '}';
     }
 
 }

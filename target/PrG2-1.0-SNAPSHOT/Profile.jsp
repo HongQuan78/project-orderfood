@@ -9,17 +9,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <%@include file="importFavicon.jsp" %>
+        <%@include file="importFavicon.jsp" %>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Profile</title>
         <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
         <!-- MDB -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}/resouces/libaries/mdb.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/profile.css">
     </head>
 
@@ -40,8 +38,7 @@
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
                                          alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
                                     <h5>ROLE</h5>
-                                    <p><%= emp.getEmp_role()=="emp"?"Nhan Vien":"Quan Ly" %></p>
-                                    <i class="far fa-edit mb-5"></i>
+                                    <p><%= emp.getEmp_role() == "emp" ? "Nhân Viên" : "Quản Lý"%></p>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body p-4">
@@ -50,28 +47,28 @@
                                         <div class="row pt-1">
                                             <div class="col-6 mb-3">
                                                 <h6>Name</h6>
-                                                <p class="text-muted"><%= emp.getEmp_name() %></p>
+                                                <p class="text-muted"><%= emp.getEmp_name()%></p>
                                             </div>
                                             <div class="col-6 mb-3">
                                                 <h6>Gender</h6>
-                                                <p class="text-muted"><%= emp.getEmp_gender() %></p>
+                                                <p class="text-muted"><%= emp.getEmp_gender()%></p>
                                             </div>
                                         </div>
                                         <hr class="mt-0 mb-4">
                                         <div class="row pt-1">
                                             <div class="col-6 mb-3">
                                                 <h6>Address</h6>
-                                                <p class="text-muted"><%= emp.getEmp_address() %></p>
+                                                <p class="text-muted"><%= emp.getEmp_address()%></p>
                                             </div>
                                             <div class="col-6 mb-3">
                                                 <h6>Phone</h6>
-                                                <p class="text-muted"><%= emp.getEmp_phone() %></p>
+                                                <p class="text-muted"><%= emp.getEmp_phone()%></p>
                                             </div>
                                         </div>
-                                            <div class="row pt-1">
+                                        <div class="row pt-1">
                                             <div class="col-6 mb-3">
                                                 <h6>Birthday</h6>
-                                                <p class="text-muted"><%= emp.getEmp_birthday() %></p>
+                                                <p class="text-muted"><%= emp.getEmp_birthday()%></p>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-start">
@@ -85,14 +82,14 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <%@include file="footer.jsp" %>
         </section>
-        
+
         <!--Jquery-->
-        <script language = "Javascript" src="resouces/libaries/jquery-3.6.1.min.js"></script>
+        <script language = "Javascript" src="${pageContext.request.contextPath}/resouces/libaries/jquery-3.6.1.min.js"></script>
         <!-- MDB -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resouces/libaries/mdb.min.js"></script>
     </body>
 </html>

@@ -12,18 +12,22 @@
 <html>
     <head>
         <%@include file="importFavicon.jsp" %>
-        <%@include file="importFavicon.jsp" %>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Food manager</title>
-        <!--boostrap-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/libaries/mdb.min.css"/>
+
         <!--fontawesome-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/sidebar.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/managerStyle.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/footer.css">
+        <title>Food manager</title>
+
+        <!--fontawesome-->
+
     </head>
     <body id="body-pd">
         <div class="page-wrapper chiller-theme toggled">
@@ -41,18 +45,16 @@
                     <div class="sidebar-menu">
                         <ul>
                             <li>
-                                <a href="/admin/employeemanager">Employee
+                                <a href="/admin/employeemanager">Quản lý nhân viên
                                 </a>
                             </li>
                             <li>
-                                <a href="/admin/foodmanager">Food</a>
+                                <a href="/admin/foodmanager">Quản lý thức ăn</a>
                             </li>
                             <li>
-                                <a href="/admin/report">Report</a>
+                                <a href="/admin/report">Xem báo cáo </a>
                             </li>
-                            <li>
-                                <a href="/admin/table">Table</a>
-                            </li>
+                          
                         </ul>
                     </div>
             </nav>
@@ -61,7 +63,7 @@
             <main class="page-content">
                 <%@include file="navbar.jsp" %>
                 <div class="container-fluid">
-                    <h1 class="text-center">Food Manager</h1>
+                    <h1 class="text-center">Danh sách các món ăn</h1>
                     <table id="myTable" class="display table table-hover responsive" style="width:100%">
                         <thead>
                             <tr>
@@ -85,13 +87,13 @@
                                 <td>
                                     <select id="selectStatus" class="form-control form-select form-select-sm">
                                         <option value="choose" disabled="true">choose</option>
-                                        <option value="/food/true-<%= f.getFood_ID()%>" <%= fdao.getFoodStatus(f.getFood_ID()).equals("true") ? "selected" : ""%>>Con hang</option>
-                                        <option value="/food/false-<%= f.getFood_ID()%>"<%= fdao.getFoodStatus(f.getFood_ID()).equals("false") ? "selected" : ""%> >Het hang</option>
+                                        <option value="/food/admin/true-<%= f.getFood_ID()%>" <%= fdao.getFoodStatus(f.getFood_ID()).equals("true") ? "selected" : ""%>>Còn hàng</option>
+                                        <option value="/food/admin/false-<%= f.getFood_ID()%>"<%= fdao.getFoodStatus(f.getFood_ID()).equals("false") ? "selected" : ""%> >Hết hàng</option>
                                     </select>
                                 </td>
                                 <td><%= f.getPrice()%></td>
                                 <td>
-                                    <a href="/food/update/<%= f.getFood_ID()%>" class="icon-a"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="/food/admin/update/<%= f.getFood_ID()%>" class="icon-a"><i class="fa-solid fa-pen-to-square"></i></a>
                                 </td>
                                 <td>
                                     <a href="#" class="icon-a icon-delete" id="<%= f.getFood_ID()%>"><i class="fa-solid fa-trash"></i></a>
@@ -104,7 +106,7 @@
                     </table>
                 </div>
                 <div class="row">
-                    <a href="/food/add" class="btn btn-dark text-center">Add new food</a>
+                    <a href="/food/admin/add" class="btn btn-lg bg-black btn-dark text-center">Thêm món ăn</a>
                 </div>
                 <%@include file="footer.jsp" %>
             </main>
@@ -115,11 +117,11 @@
         <!--datatable-->
         <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         <!--sweetalert-->
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script language = "Javascript" src="${pageContext.request.contextPath}/resouces/libaries/sweetalert2.all.min.js"></script>
         <!-- MDB -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resouces/js/sidebar.js"></script>
-        <script src="${pageContext.request.contextPath}/resouces/js/foodmanager.js"></script>
+        <script language = "Javascript" src="${pageContext.request.contextPath}/resouces/libaries/mdb.min.js"></script>
+        <script language = "Javascript" src="${pageContext.request.contextPath}/resouces/js/sidebar.js"></script>
+        <script language = "Javascript" src="${pageContext.request.contextPath}/resouces/js/foodmanager.js"></script>
 
     </body>
 </html>

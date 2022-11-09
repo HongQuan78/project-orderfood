@@ -21,10 +21,11 @@
         <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
         <!-- MDB -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}/resouces/libaries/mdb.min.css" rel="stylesheet" />
         <!--Table data-->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/paymentcss.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/footer.css">
     </head>
     <%@include file="navbar.jsp" %>
     <body>
@@ -41,7 +42,7 @@
                         if (session.getAttribute("tableID") == null) {
                     %>
                     <div>
-                        <a href="/table/booking" class="btn btn-block btn-lg btn-dark text-center my-5 py-1 ">Please choose a table</a>
+                        <a href="/table/booking" class="btn btn-block btn-lg btn-dark text-center my-5 py-1 ">Vui lòng chọn bàn trước khi đặt món</a>
                     </div>
 
                     <%
@@ -78,7 +79,7 @@
                                         <td>
                                             <div class="amount-container container-fluid">
                                                 <a href="/order/dec/<%=item%>" class="btn btn-custom btn-dark"><i class="fa-solid fa-minus"></i></a>
-                                                <input type="text" class="amount-food" id="<%= item%>" name="orderfood" value="<%= hash.get(item)%>"/>
+                                                <input type="text" class="amount-food" id="<%= item%>" name="orderfood" value="<%= hash.get(item)%>" disabled="true"/>
                                                 <a href="/order/inc/<%=item%>" class="btn btn-custom btn-dark"><i class="fa-solid fa-plus"></i></a>
                                             </div>
                                         </td>
@@ -120,7 +121,7 @@
         <!--Jquery-->
         <script language ="Javascript" src="${pageContext.request.contextPath}/resouces/libaries/jquery-3.6.1.min.js"></script>
         <!-- MDB -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resouces/libaries/mdb.min.js"></script>
         <!--Table data-->
         <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>

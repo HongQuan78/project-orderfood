@@ -4,6 +4,7 @@ com\DAOS\EmployeeDAO.class
 com\Filter\Authentication.class
 com\Controllers\OrderController.class
 com\DBConnection\DBConnection.class
+com\Filter\MD5en.class
 com\Models\Employee.class
 com\Models\Table.class
 com\Controllers\AccountController.class
@@ -14,6 +15,7 @@ com\Models\Foods.class
 com\Controllers\EmployeeController.class
 com\DAOS\TableDAO.class
 com\Controllers\AdminController.class
+com\Controllers\TableController.class
 com\DAOS\FoodDAO.class
 com\DAOS\OrderDAO.class
 com\Controllers\HomeController.class

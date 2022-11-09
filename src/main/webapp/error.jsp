@@ -11,7 +11,7 @@
         <meta charset="UTF-8" />
         <title>Oopss</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/error.css">
-        
+
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"

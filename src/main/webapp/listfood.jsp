@@ -20,12 +20,11 @@
         <title>Menu</title>
         <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
         <!-- MDB -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}/resouces/libaries/mdb.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/listfood.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/navbar.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/footer.css">
     </head>
 
     <body>
@@ -60,6 +59,7 @@
                         <img src="https://img.freepik.com/free-photo/quail-eggs-stew-with-belly-pork-chinese-food_1205-10115.jpg?w=1380&t=st=1666840678~exp=1666841278~hmac=7ccd4b36edcb00ef298cc7f400baae6eda10c5865ef7f69e3c6fad84b10fa52e"
                              class="d-block w-100 carousel-img" alt="Food 3" />
                     </div>
+
                 </div>
                 <!-- Inner -->
 
@@ -79,16 +79,16 @@
         </div>
         <div class="container">
             <div class="row">
-                <a href="/table/booking" class="btn btn-dark">Choose Table</a>
+                <a href="/table/booking" class="btn btn-dark">Chọn bàn</a>
             </div>
             <div class="row my-5">
-                <h3 class="">Table: <%= session.getAttribute("tableID")==null?"Chua chon ban":session.getAttribute("tableID").toString() %></h3>
+                <h3 class="">Table: <%= session.getAttribute("tableID") == null ? "Chua chon ban" : session.getAttribute("tableID").toString()%></h3>
             </div>
         </div>
 
         <form action="/order" method="post" id="form">
             <div class="container">
-                <%  
+                <%
                     List<Category> listCate = (List<Category>) request.getAttribute("listCate");
                     for (Category cate : listCate) {
                 %>
@@ -109,9 +109,9 @@
                                 <h6 class="card-text text-center">Price: <%= fdao.getFoodPrice(f.getFood_ID())%></h6>
                             </div>
                             <div class="card-body">
-                                <span class="btn btn-custom btn-dark" onclick="subFood('<%= f.getFood_ID()%>')"><i class="fa-solid fa-minus"></i></span>
-                                <input type="number" class="amount-food" id="<%= f.getFood_ID()%>" name="orderfood" value="0"/>
-                                <span class="btn btn-custom btn-dark" onclick="addFood('<%= f.getFood_ID()%>')"><i class="fa-solid fa-plus"></i></span>
+                                <span class="btn btn-custom btn-dark" id="o" onclick="subFood('<%= f.getFood_ID()%>')"><i class="fa-solid fa-minus"></i></span>
+                                <input type="number" class="input-amount amount-food" id="<%= f.getFood_ID()%>" name="orderfood" value="0"/>
+                                <span class="btn btn-custom btn-dark" id="o" onclick="addFood('<%= f.getFood_ID()%>')"><i class="fa-solid fa-plus"></i></span>
                             </div>
                         </div>
                     </li>
@@ -120,18 +120,15 @@
                 <%}%>
                 <input type="text" id="bind-value" value = "" name="bind-value" style="display: none">
                 <div class="btn-order-container">
-                    <button name="btnOrder1" type="submit" id="btnOrder" class="btn btn-dark btn-lg">Order now</button>
+                    <button name="btnOrder1" type="submit" id="btnOrder" class="btn btn-dark btn-lg"><i class="fa-solid fa-cart-shopping"></i></button>
                 </div>
             </div>
         </form>
         <%@include file="footer.jsp" %>
         <script src="${pageContext.request.contextPath}/resouces/libaries/jquery-3.6.1.min.js"></script>
         <!-- MDB -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resouces/libaries/mdb.min.js"></script>
         <script language="Javascript" src="${pageContext.request.contextPath}/resouces/js/listfood.js"></script>
-        <script>
-
-        </script>
     </body>
-
+    
 </html>

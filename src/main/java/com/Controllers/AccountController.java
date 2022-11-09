@@ -4,6 +4,7 @@
  */
 package com.Controllers;
 
+import com.DAOS.EmployeeDAO;
 import com.Models.Employee;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.Date;
 
 /**
  *
@@ -51,17 +53,50 @@ public class AccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         if (request.getParameter("btnCreate") != null) {
-            //viet code create vào dây
+            Employee emp = getEmployee(request, response);
+            EmployeeDAO dao = new EmployeeDAO();
+            int count = dao.addNew(emp);
+            if (count > 0) {
+                response.sendRedirect("/admin/employeemanager");
+                return;
+            } else {
+                request.setAttribute("error", "ID already exists");
+                request.getRequestDispatcher("/test.jsp").forward(request, response);
+                return;
+            }
         }
+
         if (request.getParameter("btnUpdate") != null) {
-            //viet code update vao day
+            Employee emp = getEmployee(request, response);
+            EmployeeDAO dao = new EmployeeDAO();
+            int count = dao.update(emp);
+            if (count > 0) {
+                response.sendRedirect("/admin/employeemanager");
+                return;
+            } else {
+                response.sendRedirect("/error");
+                return;
+
+            }
         }
     }
 
-    public Employee getStudent(HttpServletRequest request, HttpServletResponse response) {
+    public Employee getEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         //viet code getParam vào dây
-        return null;
+        String empID = request.getParameter("empID");
+        String empName = request.getParameter("empName");
+        String emp_birthday = request.getParameter("birthdayDate");
+        String emp_gender = request.getParameter("gender");
+        String empPhone = request.getParameter("empPhone");
+        String address = request.getParameter("address");
+        String role = request.getParameter("role");
+        String empUsername = request.getParameter("empUsername");
+        String empPass = request.getParameter("empPass");
+
+        Employee emp = new Employee(empID, empName, Date.valueOf(emp_birthday), emp_gender, empPhone, address, role, empUsername, empPass);
+        return emp;
     }
 
     /**

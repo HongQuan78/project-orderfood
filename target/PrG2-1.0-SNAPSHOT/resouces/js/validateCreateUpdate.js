@@ -5,7 +5,8 @@ $('#empForm').validate({
         empUsername: "required",
         empPass: "required",
         birthdayDate: "required",
-        address: "required"
+        address: "required",
+        empPhone: "required"
     },
     messages: {
         empID: {
@@ -18,14 +19,16 @@ $('#empForm').validate({
             required: "Please enter username"
         },
         empPass: {
-            required: "Please enter user name"
+            required: "Please enter password"
         },
         birthdayDate: {
             required: "Please select a birthday"
         },
         address: {
             required: "Please enter address"
+        },empPhone:{
+            required: "Please enter phone number"
         }
-        
+
     }
 });

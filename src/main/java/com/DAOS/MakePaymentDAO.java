@@ -36,7 +36,6 @@ public class MakePaymentDAO {
                 list.add(new MakePayment(rs.getString("Pay_ID"),
                         rs.getDate("Pay_date"),
                         rs.getDouble("Price_total"),
-                        rs.getString("MP_Status"),
                         rs.getString("Emp_ID"),
                         rs.getString("Table_ID")));
             }
@@ -84,9 +83,8 @@ public class MakePaymentDAO {
             pst.setString(1, makePayment.getPay_ID());
 //            pst.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
             pst.setDouble(2, makePayment.getPrice_total());
-            pst.setString(3, makePayment.getMP_Status());
-            pst.setString(4, makePayment.getEmp_ID());
-            pst.setString(5, makePayment.getTable_ID());
+            pst.setString(3, makePayment.getEmp_ID());
+            pst.setString(4, makePayment.getTable_ID());
             count = pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,7 +116,7 @@ public class MakePaymentDAO {
             pst.setString(1, paymentID);
             ResultSet resultSet = pst.executeQuery();
             while (resultSet.next()) {
-                mp = new MakePayment(resultSet.getString("Pay_ID"), resultSet.getDate("Pay_date"), resultSet.getDouble("Price_total"), resultSet.getString("MP_Status"), resultSet.getString("Emp_ID"), resultSet.getString("Table_ID"));
+                mp = new MakePayment(resultSet.getString("Pay_ID"), resultSet.getDate("Pay_date"), resultSet.getDouble("Price_total"), resultSet.getString("Emp_ID"), resultSet.getString("Table_ID"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);

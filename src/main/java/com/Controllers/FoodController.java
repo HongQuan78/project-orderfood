@@ -46,60 +46,46 @@ public class FoodController extends HttpServlet {
             CategoryDAO cateDAO = new CategoryDAO();
             request.setAttribute("listCate", cateDAO.getAllCate());
             request.getRequestDispatcher("/listfood.jsp").forward(request, response);
-        } else if (path.startsWith("/food/add")) {
+        } else if (path.startsWith("/food/admin/")) {
             if (session.getAttribute("admin") == null) {
                 response.sendRedirect("/home");
                 return;
             }
-            session.setAttribute("add_update", "add");
-            session.setAttribute("FOOD", null);
-            request.getRequestDispatcher("/AddNewFood.jsp").forward(request, response);
-        } else if (path.startsWith("/food/update/")) {
-            if (session.getAttribute("admin") == null) {
-                response.sendRedirect("/home");
-                return;
-            }
-            String[] s = path.split("/");
-            String id = s[s.length - 1];
-            FoodDAO dao = new FoodDAO();
-            Foods st = dao.getFoodById(id);
-            if (st == null) {
-                response.sendRedirect("/food/list");
-            } else {
-                session.setAttribute("FOOD", st);
-                session.setAttribute("add_update", "update");
+            if (path.startsWith("/food/admin/add")) {
+                session.setAttribute("add_update", null);
+                session.setAttribute("FOOD", null);
                 request.getRequestDispatcher("/AddNewFood.jsp").forward(request, response);
+            } else if (path.startsWith("/food/admin/update/")) {
+                String[] s = path.split("/");
+                String id = s[s.length - 1];
+                FoodDAO dao = new FoodDAO();
+                Foods st = dao.getFoodById(id);
+                if (st == null) {
+                    response.sendRedirect("/food/list");
+                } else {
+                    session.setAttribute("FOOD", st);
+                    session.setAttribute("add_update", "update");
+                    request.getRequestDispatcher("/AddNewFood.jsp").forward(request, response);
+                }
+            } else if (path.startsWith("/food/admin/delete/")) {
+                String[] s = path.split("/");
+                String id = s[s.length - 1];
+                FoodDAO dao = new FoodDAO();
+                dao.deleteFood(id);
+                response.sendRedirect("/admin/foodmanager");
+            } else if (path.startsWith("/food/admin/false-")) {
+                String[] s = path.split("-");
+                String id = s[s.length - 1];
+                FoodDAO dao = new FoodDAO();
+                dao.setFoodStatus(id, "false");
+                response.sendRedirect("/admin/foodmanager");
+            } else if (path.startsWith("/food/admin/true-")) {
+                String[] s = path.split("-");
+                String id = s[s.length - 1];
+                FoodDAO dao = new FoodDAO();
+                dao.setFoodStatus(id, "true");
+                response.sendRedirect("/admin/foodmanager");
             }
-        } else if (path.startsWith("/food/delete/")) {
-            if (session.getAttribute("admin") == null) {
-                response.sendRedirect("/home");
-                return;
-            }
-            String[] s = path.split("/");
-            String id = s[s.length - 1];
-            FoodDAO dao = new FoodDAO();
-            dao.deleteFood(id);
-            response.sendRedirect("/admin/foodmanager");
-        } else if (path.startsWith("/food/false-")) {
-            if (session.getAttribute("admin") == null) {
-                response.sendRedirect("/home");
-                return;
-            }
-            String[] s = path.split("-");
-            String id = s[s.length - 1];
-            FoodDAO dao = new FoodDAO();
-            dao.setFoodStatus(id, "false");
-            response.sendRedirect("/admin/foodmanager");
-        } else if (path.startsWith("/food/true-")) {
-            if (session.getAttribute("admin") == null) {
-                response.sendRedirect("/home");
-                return;
-            }
-            String[] s = path.split("-");
-            String id = s[s.length - 1];
-            FoodDAO dao = new FoodDAO();
-            dao.setFoodStatus(id, "true");
-            response.sendRedirect("/admin/foodmanager");
         } else {
             response.sendRedirect("/error");
         }
@@ -118,37 +104,45 @@ public class FoodController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        String path = request.getRequestURI();
         if (request.getParameter("btnAddNewFood") != null) {
-            if (session.getAttribute("add_update").equals("add")) {
-                foodPost("/admin/foodmanager", "/food/add", "add", request, response);
-            } else if (session.getAttribute("add_update").equals("update")) {
-                foodPost("/admin/foodmanager", "/food/update", "update", request, response);
+            String Food_ID = request.getParameter("f_id");
+            String Food_name = request.getParameter("f_name");
+            String Food_Price = request.getParameter("f_price");
+            String URL_img = request.getParameter("f_img");
+            String Category_ID = request.getParameter("Category_id");
+            FoodDAO fdao = new FoodDAO();
+            Foods f = new Foods(Food_ID, Food_name, Double.parseDouble(Food_Price), "true", URL_img, Category_ID);
+            int check = fdao.addNewFood(f);
+            if (check <= 0) {
+                request.setAttribute("error", "This ID already exist!");
+                response.sendRedirect(path);
+                return;
             }
+            response.sendRedirect("/admin/foodmanager");
+        } else if (request.getParameter("btnUpdate") != null) {
+            String Food_ID = request.getParameter("f_id");
+            String Food_name = request.getParameter("f_name");
+            String Food_Price = request.getParameter("f_price");
+            String URL_img = request.getParameter("f_img");
+            String Category_ID = request.getParameter("Category_id");
+            FoodDAO fdao = new FoodDAO();
+            String fstatus = fdao.getFoodStatus(Food_ID);
+            Foods food = new Foods(Food_ID, Food_name, Double.parseDouble(Food_Price), fstatus, URL_img, Category_ID);
+            int check = fdao.updateFood(food);
+            if (check <= 0) {
+                request.setAttribute("error", "This ID already exist!");
+                response.sendRedirect(path);
+                return;
+            }
+            response.sendRedirect("/admin/foodmanager");
         }
     }
 
     private void foodPost(String s_redirect, String e_redirect, String type, HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        String Food_ID = request.getParameter("f_id");
-        String Food_name = request.getParameter("f_name");
-        String Food_Price = request.getParameter("f_price");
-        String F_Status = request.getParameter("f_s");
-        String URL_img = request.getParameter("f_img");
-        String Category_ID = request.getParameter("Category_id");
-        Foods food = new Foods(Food_ID, Food_name, Double.parseDouble(Food_Price), F_Status, URL_img, Category_ID);
-        FoodDAO dao = new FoodDAO();
-        int count = 0;
-        if (type.equals("add")) {
-            count = dao.addNewFood(food);
-        } else if (type.equals("update")) {
-            count = dao.updateFood(food);
-        }
-        if (count > 0) {
-            response.sendRedirect(s_redirect);
-        } else {
-            response.sendRedirect(e_redirect);
-        }
+
     }
 
     /**

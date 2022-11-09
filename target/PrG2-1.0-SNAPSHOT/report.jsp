@@ -17,13 +17,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Report</title>
         <!--boostrap-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/libaries/mdb.min.css"/>
         <!--datatable-->
         <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"/>
         <!--fontawesome-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/sidebar.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/managerStyle.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/footer.css">
     </head>
     <body id="body-pd">
         <div class="page-wrapper chiller-theme toggled">
@@ -40,19 +41,19 @@
                     </div>
                     <div class="sidebar-menu">
                         <ul>
-                            <li>
-                                <a href="/admin/employeemanager">Employee
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/admin/foodmanager">Food</a>
-                            </li>
-                            <li>
-                                <a href="/admin/report">Report</a>
-                            </li>
-                            <li>
-                                <a href="/admin/table">Table</a>
-                            </li>
+                            <ul>
+                                <li>
+                                    <a href="/admin/employeemanager">Quản lý nhân viên
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/admin/foodmanager">Quản lý thức ăn</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/report">Xem báo cáo </a>
+                                </li>
+                               
+                            </ul>
                         </ul>
                     </div>
             </nav>
@@ -63,7 +64,10 @@
                 <div class="container-fluid">
                     <div class="row r1">
                         <div class="col-4 col-auto">
-                            <h4 class="form-label">Total in <%= session.getAttribute("month") == null ? "" : session.getAttribute("month").toString()%>: <%= session.getAttribute("rp") == null ? "" : session.getAttribute("rp").toString()%> VND</h4>
+                            <div class="report-label label form-control-lg">
+                                <h4 class="form-label">Tổng số tiền đã bán trong tháng <%= session.getAttribute("month") == null ? "" : session.getAttribute("month").toString()%>: <%= session.getAttribute("rp") == null ? "" : session.getAttribute("rp").toString()%> VND</h4>
+                            </div>
+
                         </div>
                         <div class="col-6">
                             <form id="selectMonth">
@@ -87,7 +91,7 @@
 
 
                     <div class="container">
-                        <h1 class="text-center">Report</h1>
+                        <h1 class="text-center">Danh sách các hóa đơn đã thu</h1>
                         <table id="myTable" class="table table-hover responsive">
                             <thead>
                             <th>ID</th>
@@ -129,9 +133,9 @@
         <!--datatable-->
         <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         <!--sweetalert-->
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="${pageContext.request.contextPath}/resouces/libaries/sweetalert2.all.min.js"></script>
         <!-- MDB -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resouces/libaries/mdb.min.js"></script>
         <script src="${pageContext.request.contextPath}/resouces/js/sidebar.js"></script>
         <script src="${pageContext.request.contextPath}/resouces/js/report.js"></script>
     </body>

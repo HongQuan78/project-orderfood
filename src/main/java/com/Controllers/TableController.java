@@ -7,7 +7,6 @@ package com.Controllers;
 import com.DAOS.TableDAO;
 import com.Models.Table;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,9 +33,6 @@ public class TableController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getRequestURI();
-        if(path.startsWith("/table/admin/change/")){
-        
-        }
         
         if (path.startsWith("/table/booking")) {
             TableDAO tableDAO = new TableDAO();

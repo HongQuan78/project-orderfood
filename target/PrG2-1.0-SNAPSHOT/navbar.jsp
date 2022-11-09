@@ -1,4 +1,3 @@
-
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-black">
     <!-- Container wrapper -->
@@ -23,7 +22,7 @@
                     <a style="color: white;" class="nav-link" href="/food/list">Menu</a>
                 </li>
 
-                <li class="nav-item" style="display: <%= request.getSession().getAttribute("admin") == null ? "none" : "inline"%>">
+                <li class="nav-item" style="display: <%= request.getSession().getAttribute("admin") == null ? "none" : "block"%>">
                     <a style="color: white;" class="nav-link" href="/admin">Manager</a>
                 </li>
             </ul>
@@ -41,7 +40,7 @@
                 </a>
 
                 <div class="dropdown">
-                    <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
+                    <a class="dropdown-toggle d-flex align-items-center dropdown-menu-xl-end hidden-arrow" href="#"
                        id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown"
                        aria-expanded="false">
                         <img src="https://www.pngitem.com/pimgs/m/421-4212266_transparent-default-avatar-png-default-avatar-images-png.png"

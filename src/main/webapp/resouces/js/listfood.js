@@ -1,21 +1,30 @@
 $(document).ready(function () {
-    $('#form').each(function () {
-        this.reset();
-    });
+//    $('#form').each(function () {
+//        this.reset();
+//    });
+    $('#btnOrder').hide();
 });
 
 function addFood(id) {
     var value = document.getElementById(id).value;
     value++;
     $("#" + id).val(value);
+    $("#" + id).attr("value", parseInt(value));
+    $('#btnOrder').show();
 }
 ;
 
 function subFood(id) {
     var value = document.getElementById(id).value;
-    value <= 0 ? "0" : value--;
-    $("#" + id).attr("value", parseInt(value));
+    value <= 0 ? 0 : value--;
     $("#" + id).val(value);
+    $("#" + id).attr("value", parseInt(value));
+    if (value == 0) {
+        $('#btnOrder').hide();
+        return;
+    }
+    $('#btnOrder').show();
+
 }
 ;
 
@@ -32,6 +41,11 @@ $('#form').submit(function (e) {
     $('#bind-value').attr('value', finalValue);
 });
 
-$("#form").on("change",function(){
-        $("#btnOrder").hide();
+$('#form input[type=number]').change(function () {
+    $('#btnOrder').show();
+});
+
+$(".input-amount").keydown(function (evt) {
+    var value = $('.input-amount').val();
+    $('#btnOrder').show();
 });

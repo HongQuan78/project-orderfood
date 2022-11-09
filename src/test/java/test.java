@@ -12,6 +12,7 @@ import com.Models.MakePayment;
 import com.Models.OrderModel;
 import com.Models.Table;
 import jakarta.servlet.http.HttpSession;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,11 +71,18 @@ public class test {
 //        for (MakePayment makePayment : list) {
 //            System.out.println(makePayment);
 //        }
-        TableDAO t = new TableDAO();
-        System.out.println(t.getTable("T0001"));
-        MakePaymentDAO mpdao = new MakePaymentDAO();
-        System.out.println(mpdao.getTotalInMonth("11"));
-        EmployeeDAO emp = new EmployeeDAO();
-        emp.delete("E0001");
+//        TableDAO t = new TableDAO();
+//        System.out.println(t.getTable("T0001"));
+//        MakePaymentDAO mpdao = new MakePaymentDAO();
+//        System.out.println(mpdao.getTotalInMonth("11"));
+//        EmployeeDAO emp = new EmployeeDAO();
+//        emp.delete("E0001");
+//        EmployeeDAO edao = new EmployeeDAO();
+//        edao.addNew(new Employee("QTest01", "Qan", Date.valueOf("2015-03-30"), "Nam", "05666565", "HG", "admin", "qtest91", "1"));
+//        
+        FoodDAO fdao = new FoodDAO();
+        Foods food = new Foods("Tst1", "tet", 2000, "true", "a", "C0001");
+        int check = fdao.addNewFood(food);
+        System.out.println(check);
     }
 }

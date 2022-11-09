@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap");
+
+
+body {
+    font-family: "Kanit", sans-serif;
+    background: #FFEF82;
+}
+
+
+.error{
+    color: red;
+}
