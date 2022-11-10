@@ -19,10 +19,6 @@ function subFood(id) {
     value <= 0 ? 0 : value--;
     $("#" + id).val(value);
     $("#" + id).attr("value", parseInt(value));
-    if (value == 0) {
-        $('#btnOrder').hide();
-        return;
-    }
     $('#btnOrder').show();
 
 }
