@@ -13,6 +13,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -57,15 +60,16 @@ public class AccountController extends HttpServlet {
         if (request.getParameter("btnCreate") != null) {
             Employee emp = getEmployee(request, response);
             EmployeeDAO dao = new EmployeeDAO();
-            int count = dao.addNew(emp);
-            if (count > 0) {
-                response.sendRedirect("/admin/employeemanager");
-                return;
-            } else {
-                request.setAttribute("error", "ID already exists");
-                request.getRequestDispatcher("/test.jsp").forward(request, response);
+            int count;
+            try {
+                count = dao.addNew(emp);
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
+                request.setAttribute("error", "Tài khoản đã tồn tại");
+                request.getRequestDispatcher("/addemp.jsp").forward(request, response);
                 return;
             }
+            response.sendRedirect("/admin/employeemanager");
         }
 
         if (request.getParameter("btnUpdate") != null) {
@@ -94,7 +98,6 @@ public class AccountController extends HttpServlet {
         String role = request.getParameter("role");
         String empUsername = request.getParameter("empUsername");
         String empPass = request.getParameter("empPass");
-
         Employee emp = new Employee(empID, empName, Date.valueOf(emp_birthday), emp_gender, empPhone, address, role, empUsername, empPass);
         return emp;
     }

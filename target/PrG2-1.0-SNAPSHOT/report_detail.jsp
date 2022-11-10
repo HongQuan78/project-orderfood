@@ -28,7 +28,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/footer.css">
     </head>
     <body id="body-pd">
-        <div class="page-wrapper chiller-theme toggled">
+        <div class="page-wrapper chiller-theme">
             <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
                 <i class="fas fa-bars"></i>
             </a>
@@ -51,6 +51,9 @@
                             </li>
                             <li>
                                 <a href="/admin/report">Xem báo cáo </a>
+                            </li>
+                            <li>
+                                <a href="/admin/oldfood">Các món ăn đã dừng kinh doanh</a>
                             </li>
                         </ul>
                     </div>
@@ -76,18 +79,18 @@
                                     List<OrderModel> list = (List<OrderModel>) request.getAttribute("list");
                                     FoodDAO fdao = new FoodDAO();
                                     for (OrderModel order : list) {
-                                        
+
                                 %>
                                 <tr>
-                                    <td><%= order.getOrder_ID() %></td>
-                                    <td><%= fdao.getFoodName(order.getFood_ID()) %></td>
-                                    <td><%= order.getQuantity() %></td>
-                                    <td><%= fdao.getFoodPrice(order.getFood_ID()) * order.getQuantity() %></td>
-                                    <td><%= order.getTable_ID() %></td>
+                                    <td><%= order.getOrder_ID()%></td>
+                                    <td><%= fdao.getFoodName(order.getFood_ID())%></td>
+                                    <td><%= order.getQuantity()%></td>
+                                    <td><%= fdao.getFoodPrice(order.getFood_ID()) * order.getQuantity()%> VND</td>
+                                    <td><%= order.getTable_ID()%></td>
 
                                 </tr>
                                 <%}
-                                    
+
                                 %>
                             </tbody>
                         </table>

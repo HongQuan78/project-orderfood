@@ -6,7 +6,10 @@ $('#empForm').validate({
         empPass: "required",
         birthdayDate: "required",
         address: "required",
-        empPhone: "required"
+        empPhone: {
+            required: true,
+            checkPhone: true
+        }
     },
     messages: {
         empID: {
@@ -26,9 +29,15 @@ $('#empForm').validate({
         },
         address: {
             required: "Please enter address"
-        },empPhone:{
+        }, empPhone: {
             required: "Please enter phone number"
         }
 
     }
+
 });
+
+jQuery.validator.addMethod("checkPhone", function (value, element) {
+    // allow any non-whitespace characters as the host part
+    return this.optional(element) || /^((\(0[1-9]\d{0,2}\)|0[1-9]\d{0,2}[\.\-]?)\d{7,8}|0[1-9]\d{8,9})$/.test(value);
+}, 'Please enter a valid phone number.');

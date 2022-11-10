@@ -78,7 +78,7 @@ public class MakePaymentDAO {
     public int addNewMakePM(MakePayment makePayment) {
         int count = 0;
         try {
-            String query = "Insert into `make_payments` values (?,NOW(),?,?,?,?)";
+            String query = "Insert into `make_payments` values (?,NOW(),?,?,?)";
             PreparedStatement pst = connection.prepareStatement(query);
             pst.setString(1, makePayment.getPay_ID());
 //            pst.setTimestamp(2, new Timestamp(System.currentTimeMillis()));

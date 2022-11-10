@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resouces/css/footer.css">
     </head>
     <body id="body-pd">
-        <div class="page-wrapper chiller-theme toggled">
+        <div class="page-wrapper chiller-theme">
             <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
                 <i class="fas fa-bars"></i>
             </a>
@@ -52,7 +52,9 @@
                                 <li>
                                     <a href="/admin/report">Xem báo cáo </a>
                                 </li>
-                               
+                                <li>
+                                    <a href="/admin/oldfood">Các món ăn đã dừng kinh doanh</a>
+                                </li>
                             </ul>
                         </ul>
                     </div>
@@ -63,11 +65,10 @@
                 <%@include file="navbar.jsp" %>
                 <div class="container-fluid">
                     <div class="row r1">
-                        <div class="col-4 col-auto">
+                        <div class="col-6 col-auto">
                             <div class="report-label label form-control-lg">
                                 <h4 class="form-label">Tổng số tiền đã bán trong tháng <%= session.getAttribute("month") == null ? "" : session.getAttribute("month").toString()%>: <%= session.getAttribute("rp") == null ? "" : session.getAttribute("rp").toString()%> VND</h4>
                             </div>
-
                         </div>
                         <div class="col-6">
                             <form id="selectMonth">
@@ -110,7 +111,7 @@
                                 <tr>
                                     <td><%= mp.getPay_ID()%></td>
                                     <td><%= mp.getPay_Date()%></td>
-                                    <td><%= mp.getPrice_total()%></td>
+                                    <td><%= mp.getPrice_total()%> VND</td>
                                     <td><%= mp.getEmp_ID()%></td>
                                     <td><%= mp.getTable_ID()%></td>
                                     <td> <a href="/admin/paymentdetail/<%= mp.getPay_ID()%>">Detail</a></td>

@@ -13,6 +13,7 @@ import com.Models.OrderModel;
 import com.Models.Table;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +30,7 @@ import java.util.Random;
  */
 public class test {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 //        String orderString = "/F00001,1/F00002,3/F00021,2/F00041,1/F00081,1";
 //        orderString = orderString.substring(1);
 //        HashMap<String, Integer> hashMap = new HashMap<String, Integer>();

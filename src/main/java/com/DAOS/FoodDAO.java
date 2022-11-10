@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.DAOS;
 
 import com.DBConnection.DBConnection;
@@ -46,6 +42,24 @@ public class FoodDAO {
         return list;
     }
 
+    public List<Foods> getAllOldFood() {
+        List<Foods> list = new ArrayList<>();
+        try {
+            Statement st = null;
+            ResultSet rs = null;
+            String query = "SELECT * FROM `foods` WHERE `Validate` LIKE 'false'";
+            st = connection.createStatement();
+            rs = st.executeQuery(query);
+            while (rs.next()) {
+                Foods f = new Foods(rs.getString("Food_ID"), rs.getString("Food_name"), rs.getDouble("Price"), rs.getString("F_Status"), rs.getString("URL_img"), rs.getString("Category_ID"));
+                list.add(f);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
     public List<Foods> getFoodInCategory(String category_id) {
         List<Foods> list = new ArrayList<>();
         try {
@@ -78,6 +92,20 @@ public class FoodDAO {
         return count;
     }
 
+    public int setFoodValid(String food_ID) {
+        int count = 0;
+        try {
+            PreparedStatement pst = null;
+            String query = "UPDATE `foods` SET `F_Status` = 'true', `Validate` = 'true' WHERE `foods`.`Food_ID` = ?";
+            pst = connection.prepareStatement(query);
+            pst.setString(1, food_ID);
+            count = pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(TableDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
     public int deleteFood(String food_ID) {
         int count = 0;
         try {
@@ -92,22 +120,18 @@ public class FoodDAO {
         return count;
     }
 
-    public int addNewFood(Foods food) {
+    public int addNewFood(Foods food) throws SQLException {
         int count = 0;
-        try {
-            String query = "INSERT INTO `foods` (`Food_ID`, `Food_name`, `Price`, `F_Status`, `URL_img`, `Validate`, `Category_ID`) "
-                    + "VALUES (?, ?, ?, ?, ?, 'true', ?);";
-            PreparedStatement pst = connection.prepareStatement(query);
-            pst.setString(1, food.getFood_ID());
-            pst.setString(2, food.getFood_name());
-            pst.setDouble(3, food.getPrice());
-            pst.setString(4, food.getF_Status());
-            pst.setString(5, food.getURL_img());
-            pst.setString(6, food.getCategory_ID());
-            count = pst.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String query = "INSERT INTO `foods` (`Food_ID`, `Food_name`, `Price`, `F_Status`, `URL_img`, `Validate`, `Category_ID`) "
+                + "VALUES (?, ?, ?, ?, ?, 'true', ?);";
+        PreparedStatement pst = connection.prepareStatement(query);
+        pst.setString(1, food.getFood_ID());
+        pst.setString(2, food.getFood_name());
+        pst.setDouble(3, food.getPrice());
+        pst.setString(4, food.getF_Status());
+        pst.setString(5, food.getURL_img());
+        pst.setString(6, food.getCategory_ID());
+        count = pst.executeUpdate();
         return count;
     }
 

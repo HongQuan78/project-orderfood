@@ -63,25 +63,20 @@ public class EmployeeDAO {
         return emp;
     }
 
-    public int addNew(Employee employee) {
+    public int addNew(Employee employee) throws SQLException {
         int count = 0;
-        try {
-            String query = "Insert into employee values (?,?,?,?,?,?,?,?,?)";
-            PreparedStatement pst = connection.prepareStatement(query);
-            pst.setString(1, employee.getEmp_ID());
-            pst.setString(2, employee.getEmp_name());
-            pst.setDate(3, employee.getEmp_birthday());
-            pst.setString(4, employee.getEmp_gender());
-            pst.setString(5, employee.getEmp_phone());
-            pst.setString(6, employee.getEmp_address());
-            pst.setString(7, employee.getEmp_role());
-            pst.setString(8, employee.getUsername());
-            pst.setString(9, employee.getPassword());
-            count = pst.executeUpdate();
-            return count;
-        } catch (SQLException ex) {
-            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String query = "Insert into employee values (?,?,?,?,?,?,?,?,?)";
+        PreparedStatement pst = connection.prepareStatement(query);
+        pst.setString(1, employee.getEmp_ID());
+        pst.setString(2, employee.getEmp_name());
+        pst.setDate(3, employee.getEmp_birthday());
+        pst.setString(4, employee.getEmp_gender());
+        pst.setString(5, employee.getEmp_phone());
+        pst.setString(6, employee.getEmp_address());
+        pst.setString(7, employee.getEmp_role());
+        pst.setString(8, employee.getUsername());
+        pst.setString(9, employee.getPassword());
+        count = pst.executeUpdate();
         return count;
     }
 

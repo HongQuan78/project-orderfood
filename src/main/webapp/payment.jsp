@@ -99,7 +99,6 @@
                             <div class="container-fluid">
                                 <h6 style="margin-bottom: 10px;">Employee: <%= emp.getEmp_name()%> </h6>
                                 <h6 style="margin-bottom: 10px;">Table: <%= TableID%></h6>
-                                <h6 style="margin-bottom: 10px;">Discount: 0 VNĐ</h6>
                                 <h4 style="color: green;">Order total: <%= totalPrice%> VNĐ (VAT)</h4>
                                 <form action="/order" method="post">
                                     <button type="submit" name="btnPay" id="btnPay"

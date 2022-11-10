@@ -15,6 +15,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -73,18 +76,28 @@ public class FoodController extends HttpServlet {
                 FoodDAO dao = new FoodDAO();
                 dao.deleteFood(id);
                 response.sendRedirect("/admin/foodmanager");
+                return;
             } else if (path.startsWith("/food/admin/false-")) {
                 String[] s = path.split("-");
                 String id = s[s.length - 1];
                 FoodDAO dao = new FoodDAO();
                 dao.setFoodStatus(id, "false");
                 response.sendRedirect("/admin/foodmanager");
+                return;
             } else if (path.startsWith("/food/admin/true-")) {
                 String[] s = path.split("-");
                 String id = s[s.length - 1];
                 FoodDAO dao = new FoodDAO();
                 dao.setFoodStatus(id, "true");
                 response.sendRedirect("/admin/foodmanager");
+                return;
+            } else if (path.startsWith("/food/admin/changeinvalid/")) {
+                String[] s = path.split("/");
+                String id = s[s.length - 1];
+                FoodDAO dao = new FoodDAO();
+                dao.setFoodValid(id);
+                response.sendRedirect("/admin/oldfood");
+                return;
             }
         } else {
             response.sendRedirect("/error");
@@ -113,10 +126,13 @@ public class FoodController extends HttpServlet {
             String Category_ID = request.getParameter("Category_id");
             FoodDAO fdao = new FoodDAO();
             Foods f = new Foods(Food_ID, Food_name, Double.parseDouble(Food_Price), "true", URL_img, Category_ID);
-            int check = fdao.addNewFood(f);
-            if (check <= 0) {
-                request.setAttribute("error", "This ID already exist!");
-                response.sendRedirect(path);
+            int check = 0;
+            try {
+                check = fdao.addNewFood(f);
+            } catch (SQLException ex) {
+                Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
+                request.setAttribute("error", "Món ăn đã tồn tại");
+                request.getRequestDispatcher("/AddNewFood.jsp").forward(request, response);
                 return;
             }
             response.sendRedirect("/admin/foodmanager");
@@ -130,11 +146,6 @@ public class FoodController extends HttpServlet {
             String fstatus = fdao.getFoodStatus(Food_ID);
             Foods food = new Foods(Food_ID, Food_name, Double.parseDouble(Food_Price), fstatus, URL_img, Category_ID);
             int check = fdao.updateFood(food);
-            if (check <= 0) {
-                request.setAttribute("error", "This ID already exist!");
-                response.sendRedirect(path);
-                return;
-            }
             response.sendRedirect("/admin/foodmanager");
         }
     }

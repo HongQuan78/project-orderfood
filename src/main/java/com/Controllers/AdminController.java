@@ -80,6 +80,11 @@ public class AdminController extends HttpServlet {
             session.setAttribute("month", month);
             session.setAttribute("rp", mpdao.getTotalInMonth(month));
             response.sendRedirect("/admin/report");
+        } else if (path.startsWith("/admin/oldfood")) {
+            FoodDAO dao = new FoodDAO();
+            List<Foods> list = dao.getAllOldFood();
+            request.setAttribute("listFood", list);
+            request.getRequestDispatcher("/oldfood.jsp").forward(request, response);
         } else {
             response.sendRedirect("/error");
         }

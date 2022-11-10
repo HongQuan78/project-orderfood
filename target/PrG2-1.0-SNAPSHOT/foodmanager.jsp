@@ -30,7 +30,7 @@
 
     </head>
     <body id="body-pd">
-        <div class="page-wrapper chiller-theme toggled">
+        <div class="page-wrapper chiller-theme">
             <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
                 <i class="fas fa-bars"></i>
             </a>
@@ -53,6 +53,9 @@
                             </li>
                             <li>
                                 <a href="/admin/report">Xem báo cáo </a>
+                            </li>
+                            <li>
+                                <a href="/admin/oldfood">Các món ăn đã dừng kinh doanh</a>
                             </li>
                           
                         </ul>
@@ -91,7 +94,7 @@
                                         <option value="/food/admin/false-<%= f.getFood_ID()%>"<%= fdao.getFoodStatus(f.getFood_ID()).equals("false") ? "selected" : ""%> >Hết hàng</option>
                                     </select>
                                 </td>
-                                <td><%= f.getPrice()%></td>
+                                <td><%= f.getPrice()%> VND</td>
                                 <td>
                                     <a href="/food/admin/update/<%= f.getFood_ID()%>" class="icon-a"><i class="fa-solid fa-pen-to-square"></i></a>
                                 </td>
