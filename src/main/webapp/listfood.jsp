@@ -106,7 +106,7 @@
                             <div class="food-card-title">
                                 <h3 class="foods-name"><%= f.getFood_name()%></h3>
                                 <br>
-                                <h6 class="card-text text-center">Price: <%= fdao.getFoodPrice(f.getFood_ID())%></h6>
+                                <h6 class="card-text text-center">Price: <%= fdao.getFoodPrice(f.getFood_ID())%> VND</h6>
                             </div>
                             <div class="card-body">
                                 <span class="btn btn-custom btn-dark" id="o" onclick="subFood('<%= f.getFood_ID()%>')"><i class="fa-solid fa-minus"></i></span>
