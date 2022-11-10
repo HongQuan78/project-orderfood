@@ -82,7 +82,7 @@
                 <a href="/table/booking" class="btn btn-dark">Chọn bàn</a>
             </div>
             <div class="row my-5">
-                <h3 class="">Table: <%= session.getAttribute("tableID") == null ? "Chua chon ban" : session.getAttribute("tableID").toString()%></h3>
+                <h3 class="">Table: <%= session.getAttribute("tableID") == null ? "Chưa chọn bàn" : session.getAttribute("tableID").toString()%></h3>
             </div>
         </div>
 
@@ -130,5 +130,5 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resouces/libaries/mdb.min.js"></script>
         <script language="Javascript" src="${pageContext.request.contextPath}/resouces/js/listfood.js"></script>
     </body>
-    
+
 </html>

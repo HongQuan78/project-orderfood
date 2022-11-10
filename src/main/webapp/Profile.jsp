@@ -25,7 +25,6 @@
         <%@include file="navbar.jsp" %>
         <%
             Employee emp = (Employee) session.getAttribute("employee");
-
         %>
         <section class="vh-100">
             <div class="container py-5 h-100">
@@ -38,7 +37,7 @@
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
                                          alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
                                     <h5>ROLE</h5>
-                                    <p><%= emp.getEmp_role() == "emp" ? "Nhân Viên" : "Quản Lý"%></p>
+                                    <p><%= emp.getEmp_role().equals("emp") ? "Nhân Viên" : "Quản Lý"%></p>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body p-4">

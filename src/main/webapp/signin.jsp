@@ -25,7 +25,7 @@
         <title>Sign in</title>
     </head>
     <body>
-        <section class="my-5 bg-color-custom">
+        <section class="my-5 bg-color-custom gradient-custom-2">
             <div class="container py-5">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-xl-10">
