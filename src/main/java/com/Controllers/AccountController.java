@@ -5,6 +5,7 @@
 package com.Controllers;
 
 import com.DAOS.EmployeeDAO;
+import com.Filter.MD5en;
 import com.Models.Employee;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -61,6 +64,12 @@ public class AccountController extends HttpServlet {
             Employee emp = getEmployee(request, response);
             EmployeeDAO dao = new EmployeeDAO();
             int count;
+            MD5en md5 = new MD5en();
+            try {
+                emp.setPassword(md5.encrypt(emp.getPassword()));
+            } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+                Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             try {
                 count = dao.addNew(emp);
             } catch (SQLException ex) {
@@ -75,7 +84,14 @@ public class AccountController extends HttpServlet {
         if (request.getParameter("btnUpdate") != null) {
             Employee emp = getEmployee(request, response);
             EmployeeDAO dao = new EmployeeDAO();
+            MD5en md5 = new MD5en();
+            try {
+                emp.setPassword(md5.encrypt(emp.getPassword()));
+            } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+                Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             int count = dao.update(emp);
+
             if (count > 0) {
                 response.sendRedirect("/admin/employeemanager");
                 return;
