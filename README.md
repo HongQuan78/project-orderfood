@@ -1,5 +1,5 @@
-## Project: Online Food Ordering System for Restaurant Staff
-This project is an online food ordering system designed for restaurant staff to manage orders made by customers who dine in at the restaurant. The system allows staff to take and process orders, assign tables to customers, process payments, and manage employee accounts. Customers do not have access to the system; the system is intended for use only by restaurant staff.
+## Project: Food Ordering System for Restaurant Staff
+This project is a direct food ordering system designed for restaurant staff to serve customers who dine in at the restaurant. The system allows staff to take orders, assign tables to customers, and process payments. Customers do not have access to the system; it is intended for use only by restaurant staff.
 
 ### Prerequisites
 + Java 8 or higher
@@ -11,11 +11,8 @@ This project is an online food ordering system designed for restaurant staff to 
 + Configure the database connection settings in config.properties file.
 + Build and run the project using Netbeans IDE.
 ### Usage
-1. Admin
-The admin is responsible for adding new employee accounts, managing employee information, and managing the system's settings. To access the admin panel, go to http://localhost/admin and enter the login credentials.
-
-2. Employee
-The employees are the staff members who take orders from customers, assign tables to customers, process payments, and manage customer and order information. Employees need to log in to the system before they can access the orders page.
+1. Admin: The admin is responsible for managing the entire system including the menu and employee accounts.
+2. Employee: The employees are staff members who take orders, assign tables to customers, and process payments.
 
 ### Features
 + Secure login system for employees and admin
