@@ -29,5 +29,4 @@ The employees are the staff members who take orders from customers, assign table
 + Payment system for processing payments
 + Menu management system for adding, deleting, and updating meals
 + Employee management system for adding, deleting, and updating employee accounts
-### License
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+
