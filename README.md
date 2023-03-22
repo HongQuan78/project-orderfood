@@ -1,9 +1,5 @@
-# Project: Online Food Ordering System for Restaurant Staff
+## Project: Online Food Ordering System for Restaurant Staff
 This project is an online food ordering system designed for restaurant staff to manage orders made by customers who dine in at the restaurant. The system allows staff to take and process orders, assign tables to customers, process payments, and manage employee accounts. Customers do not have access to the system; the system is intended for use only by restaurant staff.
-
-## Getting Started:
-
-To use this system, you need a web browser and internet connectivity.
 
 ### Prerequisites
 + Java 8 or higher
@@ -11,10 +7,9 @@ To use this system, you need a web browser and internet connectivity.
 + MySQL 5.6 or higher
 ### Installation
 + Clone the repository to your local machine or server.
-+ Import the database schema from db.sql file.
++ Import the database schema from project_database_final.sql file.
 + Configure the database connection settings in config.properties file.
-+ Build the project using mvn clean install.
-+ Deploy the generated WAR file in Tomcat server.
++ Build and run the project using Netbeans IDE.
 ### Usage
 1. Admin
 The admin is responsible for adding new employee accounts, managing employee information, and managing the system's settings. To access the admin panel, go to http://localhost/admin and enter the login credentials.
